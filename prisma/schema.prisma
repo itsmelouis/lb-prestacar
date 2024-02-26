@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Avis {
+  id           Int      @id @default(autoincrement())
+  prenom       String
+  nom          String
+  email        String
+  message      String
+  estValide    Boolean? @default(false)
+  estRgpd      Boolean
+  estCondition Boolean
+}
+
+model Voiture {
+  id           Int      @id @default(autoincrement())
+  nom          String
+  nom_image    String
+  description  String
+  id_categorie Int
+  Categorie    Categorie @relation(fields: [id_categorie], references: [id])
+  Grille_tarrifiaire Grille_tariffiaire[]
+  Option       Option[]
+}
+
+model Categorie {
+  id      Int      @id @default(autoincrement())
+  nom     String
+  Voiture Voiture[]
+}
+
+model Option {
+  id         Int     @id @default(autoincrement())
+  intitule   String
+  prix       String
+  id_voiture Int
+  Voiture    Voiture @relation(fields: [id_voiture], references: [id])
+}
+
+model Grille_tariffiaire {
+  id         Int     @id @default(autoincrement())
+  temps      String
+  prix       String
+  id_voiture Int
+  Voiture    Voiture @relation(fields: [id_voiture], references: [id])
+}
+
+model Utilisateur {
+  id       Int      @id @default(autoincrement())
+  email    String
+  password String
+}
+
+model Contact {
+  id               Int     @id @default(autoincrement())
+  prenom           String
+  nom              String
+  telephone        String
+  email            String
+  type_prestation  String
+  message          String
+  estCondition     Boolean
+  estRgpd          Boolean
+}
