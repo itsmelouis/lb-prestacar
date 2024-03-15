@@ -16,26 +16,26 @@ model Avis {
   nom          String
   email        String
   message      String
-  estValide    Boolean? @default(false)
-  estRgpd      Boolean
-  estCondition Boolean
+  estValide    Boolean  @default(false)
+  estRgpd      Boolean? 
+  estCondition Boolean? 
 }
 
 model Voiture {
-  id           Int      @id @default(autoincrement())
-  nom          String
-  nom_image    String
-  description  String
-  id_categorie Int
-  Categorie    Categorie @relation(fields: [id_categorie], references: [id])
-  Grille_tarrifiaire Grille_tariffiaire[]
-  Option       Option[]
+  id               Int                 @id @default(autoincrement())
+  nom              String
+  nom_image        String
+  description      String
+  id_categorie     Int
+  Categorie        Categorie          @relation(fields: [id_categorie], references: [id])
+  Options          Option[]
+  GrillesTarifiaires GrilleTarifiaire[]
 }
 
 model Categorie {
-  id      Int      @id @default(autoincrement())
-  nom     String
-  Voiture Voiture[]
+  id       Int       @id @default(autoincrement())
+  nom      String
+  Voitures Voiture[]
 }
 
 model Option {
@@ -46,7 +46,7 @@ model Option {
   Voiture    Voiture @relation(fields: [id_voiture], references: [id])
 }
 
-model Grille_tariffiaire {
+model GrilleTarifiaire {
   id         Int     @id @default(autoincrement())
   temps      String
   prix       String
@@ -55,7 +55,7 @@ model Grille_tariffiaire {
 }
 
 model Utilisateur {
-  id       Int      @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   email    String
   password String
 }
@@ -67,7 +67,8 @@ model Contact {
   telephone        String
   email            String
   type_prestation  String
+  date_presation   DateTime
   message          String
-  estCondition     Boolean
-  estRgpd          Boolean
+  estCondition     Boolean?
+  estRgpd          Boolean?
 }
