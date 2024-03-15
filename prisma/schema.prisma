@@ -64,8 +64,8 @@ model Contact {
   id               Int     @id @default(autoincrement())
   prenom           String
   nom              String
-  telephone        String
-  email            String
+  telephone        String?
+  email            String?
   type_prestation  String
   date_presation   DateTime
   message          String
