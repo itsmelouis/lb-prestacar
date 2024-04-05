@@ -9,7 +9,7 @@
           <RouterLink to="/about" class="text-gray-700 hover:text-gray-900">À propos</RouterLink>
         </nav>
         <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
-          Devis personnlisé
+          Devis personnalisé
         </button>
       </div>
     </div>

@@ -7,16 +7,16 @@
       class="absolute left-10 bottom-10 bg-black bg-opacity-35 flex flex-col justify-center items-start p-8 max-w-fit max-h-fit rounded-lg">
       <h2 class="text-3xl font-bold text-white">PRESTACAR, <br> le meilleur de la location de véhicules de luxe.</h2>
       <ul class="text-white mt-4 space-y-2">
-        <li>✔️ Véhicules haut de gamme</li>
-        <li>✔ Des prix justes</li>
-        <li>✔ Une équipe disponible & réactive</li>
+        <li>• Véhicules haut de gamme</li>
+        <li>• Des prix justes</li>
+        <li>• Une équipe disponible & réactive</li>
       </ul>
       <div class="mt-4 space-x-4">
         <NuxtLink class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded" to="/vehicules">
           Découvrir nos véhicules
         </NuxtLink>
         <NuxtLink to="/contact"
-          class="bg-transparent hover:bg-yellow-600 text-yellow-500 outline outline-yellow-500 font-bold py-2 px-4 rounded">
+          class="bg-transparent hover:bg-black hover:bg-opacity-25 text-white outline outline-yellow-500 font-bold py-2 px-4 rounded">
           Devis personnlisé
         </NuxtLink>
       </div>
