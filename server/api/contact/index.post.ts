@@ -1,4 +1,7 @@
 import { prisma } from "~/prisma/db";
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.NUXT_RESEND_API_KEY);
 
 interface ContactBody {
   firstName: string;
@@ -62,11 +65,24 @@ export default eventHandler<{ body: ContactBody }>(async (event) => {
   }
 
   // Vérification que l'email ou le téléphone soit renseigné
-  if (!email && !phone) {
+  if (!email) {
     throw createError({
-      message: "Au moins un moyen de contact (téléphone ou email) doit être renseigné.",
+      message: "L'email est obligatoire.",
       statusCode: 400,
     });
+  }
+
+  // Ajout du contact à Resend
+  try {
+    await resend.contacts.create({
+      email: email,
+      firstName: firstName,
+      lastName: name,
+      unsubscribed: !isRgpd,
+      audienceId: 'c354af32-5877-40e7-b903-2a19c70c1796',
+    });
+  } catch (resendError) {
+    console.error('Erreur lors de l\'ajout du contact à Resend:', resendError);
   }
 
   // Enregistrement dans la base de données
@@ -75,7 +91,7 @@ export default eventHandler<{ body: ContactBody }>(async (event) => {
       data: {
         prenom: firstName,
         nom: name,
-        email: email ? email : null, // Permet de stocker null si l'email n'est pas renseigné
+        email: email,
         telephone: phone ? phone : null, // Permet de stocker null si le téléphone n'est pas renseigné
         type_prestation: "contact", // Gestion du type de prestation
         message: message,
