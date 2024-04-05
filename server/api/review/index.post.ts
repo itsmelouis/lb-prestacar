@@ -1,4 +1,7 @@
 import { prisma } from "~/prisma/db";
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.NUXT_RESEND_API_KEY);
 
 interface ReviewBody {
   firstName: string;
@@ -54,6 +57,19 @@ export default eventHandler<{ body: ReviewBody }>(async (event) => {
       message: "L'email est invalide.",
       statusCode: 400,
     });
+  }
+
+  // Ajout du contact à Resend
+  try {
+    await resend.contacts.create({
+      email: email,
+      firstName: firstName,
+      lastName: name,
+      unsubscribed: !isRgpd,
+      audienceId: 'c354af32-5877-40e7-b903-2a19c70c1796',
+    });
+  } catch (resendError) {
+    console.error('Erreur lors de l\'ajout du contact à Resend:', resendError);
   }
 
   try {

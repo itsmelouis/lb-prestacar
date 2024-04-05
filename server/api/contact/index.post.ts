@@ -84,7 +84,7 @@ export default eventHandler<{ body: ContactBody }>(async (event) => {
   } catch (resendError) {
     console.error('Erreur lors de l\'ajout du contact à Resend:', resendError);
   }
-
+  
   // Enregistrement dans la base de données
   try {
     await prisma.contact.create({
