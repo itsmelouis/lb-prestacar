@@ -1,8 +1,10 @@
 import { prisma } from "~/prisma/db";
 
 export default eventHandler(async (event) => {
+  // Vérification de l'authentification de l'utilisateur
   await requireAuthSession(event);
 
+  // Récupération et validation de l'ID de la voiture
   const id = parseInt(event.context.params!.id) as number;
 
   if (!Number.isInteger(id)) {
@@ -12,6 +14,7 @@ export default eventHandler(async (event) => {
     });
   }
 
+  // Vérification de l'existence de la voiture avant suppression
   const car = await prisma.voiture.findUnique({
     where: {
       id: id,
@@ -25,6 +28,7 @@ export default eventHandler(async (event) => {
     });
   }
 
+  // Tentative de suppression de la voiture
   try {
     await prisma.voiture.delete({
       where: {

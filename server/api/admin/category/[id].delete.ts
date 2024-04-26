@@ -1,8 +1,10 @@
 import { prisma } from "~/prisma/db";
 
 export default eventHandler(async (event) => {
+  // Vérification de l'authentification de l'utilisateur
   await requireAuthSession(event);
 
+  // Récupération et validation de l'ID de la catégorie
   const id = parseInt(event.context.params!.id) as number;
 
   if (!Number.isInteger(id)) {
@@ -12,6 +14,7 @@ export default eventHandler(async (event) => {
     });
   }
 
+  // Vérification de l'existence de la catégorie avant suppression
   const category = await prisma.categorie.findUnique({
     where: {
       id: id,
@@ -25,6 +28,7 @@ export default eventHandler(async (event) => {
     });
   }
 
+  // Tentative de suppression de la catégorie
   try {
     await prisma.categorie.delete({
       where: {
