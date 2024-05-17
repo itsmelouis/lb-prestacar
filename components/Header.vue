@@ -1,17 +1,38 @@
 <template>
-  <header class="bg-white">
+  <header class="bg-white fixed w-full z-20 top-0 start-0 shadow-[rgba(0,0,0,0.24)_0px_3px_8px]">
     <div class="container mx-auto md:flex md:justify-between md:items-center">
       <img class="h-24 sm:h-28" src="/logo_prestacar.png" alt="Logo prestacar">
       <div class="flex flex-row gap-6 items-center">
         <nav class="flex flex-row items-center font-semibold gap-6">
-          <RouterLink to="/vehicules" class="text-gray-700 hover:text-gray-900">Véhicules</RouterLink>
-          <RouterLink to="/contact" class="text-gray-700 hover:text-gray-900">Contact</RouterLink>
-          <RouterLink to="/about" class="text-gray-700 hover:text-gray-900">À propos</RouterLink>
+          <RouterLink to="/vehicules" class="group relative flex items-center justify-center self-stretch">
+            <span>Véhicules</span>
+            <div class="absolute top-7 rounded-lg inline-block h-[0.2rem] bg-yellow-500 transition-all duration-300 ease-out w-0 opacity-0 group-hover:w-full group-hover:opacity-100" ></div>
+          </RouterLink>
+          <RouterLink to="/contact" class="group relative flex items-center justify-center self-stretch">
+            <span>Contact</span>
+            <div class="absolute top-7 rounded-lg inline-block h-[0.2rem] bg-yellow-500 transition-all duration-300 ease-out w-0 opacity-0 group-hover:w-full group-hover:opacity-100" ></div>
+          </RouterLink>
+          <RouterLink to="/about" class="group relative flex items-center justify-center self-stretch">
+            <span>À propos</span>
+            <div class="absolute top-7 rounded-lg inline-block h-[0.2rem] bg-yellow-500 transition-all duration-300 ease-out w-0 opacity-0 group-hover:w-full group-hover:opacity-100" ></div>
+          </RouterLink>
         </nav>
-        <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
-          Devis personnalisé
-        </button>
+        <Button label="Devis personnalisé" severity="primary"></Button>
+        <div class="md:hidden">
+          <button class="text-gray-100 hover:text-gray-400 focus:outline-none focus:text-gray-400">
+            <Icon name="cil:hamburger-menu" color="black" />
+          </button>
+        </div>
       </div>
     </div>
   </header>
 </template>
+
+<style scoped>
+.router-link-active span {
+  @apply font-extrabold;
+}
+/* .router-link-active:hover {
+  @apply bg-green-200 font-medium;
+} */
+</style>
