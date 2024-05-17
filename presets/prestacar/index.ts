@@ -6,6 +6,8 @@ import global from './global';
 import ripple from './ripple';
 import tag from './tag';
 import inputtext from './inputtext';
+import dropdown from './dropdown';
+import multiselect from './multiselect';
 
 export default {
     global,
@@ -16,6 +18,8 @@ export default {
     button,
     card,
     carousel,
+    dropdown,
     inputtext,
+    multiselect,
     tag,
 }
