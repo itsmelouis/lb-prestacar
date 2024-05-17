@@ -1,10 +1,24 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import path from 'path';
 export default defineNuxtConfig({
   modules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    'nuxt-icon',
+    'nuxt-primevue'
   ],
+  primevue: {
+    options: {
+      unstyled: true
+    },
+    importPT: { from: path.resolve(__dirname, './presets/prestacar/') }
+  },
   devtools: { enabled: false },
-
+  tailwindcss: 
+  {
+    exposeConfig: true,
+    config: {
+      content: ["presets/**/*.{js,vue,ts}", "pages/**/*.{js,vue,ts}", "components/**/*.{js,vue,ts}, layouts/**/*.{js,vue,ts}"]
+    }
+  },
   runtimeConfig: {
     auth: {
       name: "nuxt-session",
