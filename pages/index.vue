@@ -1,8 +1,6 @@
 <template>
-  <Header />
   <section class="relative">
-    <img alt="Luxury vehicle" class="w-full h-auto" height="500" src="/hero_limo.png"
-       width="768" />
+    <img alt="Luxury vehicle" class="w-full h-auto" height="500" src="/hero_limo.png" width="768" />
     <div
       class="absolute left-10 bottom-10 bg-black bg-opacity-35 flex flex-col justify-center items-start p-8 max-w-fit max-h-fit rounded-lg">
       <h2 class="text-3xl font-bold text-white">PRESTACAR, <br> le meilleur de la location de véhicules de luxe.</h2>
@@ -12,17 +10,27 @@
         <li>• Une équipe disponible & réactive</li>
       </ul>
       <div class="mt-4 space-x-4">
-        <NuxtLink class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded" to="/vehicules">
-          Découvrir nos véhicules
+        <NuxtLink to="/vehicules">
+          <Button label="Découvrir nos véhicules" severity="primary" />
         </NuxtLink>
-        <NuxtLink to="/contact"
-          class="bg-transparent hover:bg-black hover:bg-opacity-25 text-white outline outline-yellow-500 font-bold py-2 px-4 rounded">
-          Devis personnlisé
+        <NuxtLink to="/contact">
+          <Button label="Devis personnalisé" severity="secondary" />
         </NuxtLink>
       </div>
     </div>
   </section>
-  <section class="relative w-full py-12 bg-gray-50">
+  <section class="flex flex-col justify-center items-center my-10">
+    <h3 class="font-semibold text-2xl text-center mb-4">Nos top véhicules</h3>
+    <div class="flex flex-row gap-8">
+      <CardCar />
+      <CardCar />
+      <CardCar />
+    </div>
+    <NuxtLink to="/vehicules" class="mt-10">
+      <Button label="Voir tous nos véhicules" severity="primary" />
+    </NuxtLink>
+  </section>
+  <section class="relative w-full py-12">
     <div class="flex flex-col gap-4 px-4 md:px-6">
       <div class="grid w-full items-center gap-16 sm:grid-cols-2">
         <div class="aspect-square rounded-xl overflow-hidden">
@@ -41,9 +49,8 @@
               the emerging trends and technologies that are shaping the future of the Jamstack.
             </p>
             <div class="flex gap-2">
-              <NuxtLink class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
-                to="/vehicules">
-                Découvrir nos véhicules
+              <NuxtLink to="/vehicules">
+                <Button label="Découvrir nos véhicules" severity="primary" />
               </NuxtLink>
             </div>
           </div>
@@ -51,4 +58,81 @@
       </div>
     </div>
   </section>
+  <section class="relative w-full py-12">
+    <h3 class="font-semibold text-2xl text-center mb-4">Nos prestations</h3>
+    <Carousel :value="products" :numVisible="3" :numScroll="3" :responsiveOptions="responsiveOptions">
+      <template #item="slotProps">
+        <div class="mx-2">
+          <img :src="slotProps.data.image" :alt="slotProps.data.name">
+          <p class="text-center font-semibold">{{ slotProps.data.name }}</p>
+        </div>
+      </template>
+    </Carousel>
+  </section>
+  <section class="relative mx-52 py-12">
+    <h3 class="font-semibold text-2xl text-center mb-4">FAQ :</h3>
+    <Accordion :activeIndex="0">
+      <AccordionTab v-for="tab in tabs" :key="tab.title" :header="tab.title">
+        <p>{{ tab.content }}</p>
+      </AccordionTab>
+    </Accordion>
+  </section>
 </template>
+
+
+<script setup lang="ts">
+
+const products = ref([
+  { image: 'hero_limo.png', name: 'Mariage' },
+  { image: 'hero_limo.png', name: 'Anniversaire' },
+  { image: 'hero_limo.png', name: 'Soirée' },
+  { image: 'hero_limo.png', name: 'Transport Aéroport/Gare' },
+  { image: 'hero_limo.png', name: 'Taxi' },
+])
+
+const tabs = ref([
+  {
+    title: 'Question 1',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+  },
+  {
+    title: 'Question 2',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+  },
+  {
+    title: 'Question 3',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+  },
+  {
+    title: 'Question 4',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+  },
+  {
+    title: 'Question 5',
+    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+  }
+]);
+
+const responsiveOptions = ref([
+  {
+    breakpoint: '1400px',
+    numVisible: 2,
+    numScroll: 1
+  },
+  {
+    breakpoint: '1199px',
+    numVisible: 3,
+    numScroll: 1
+  },
+  {
+    breakpoint: '767px',
+    numVisible: 2,
+    numScroll: 1
+  },
+  {
+    breakpoint: '575px',
+    numVisible: 1,
+    numScroll: 1
+  }
+]);
+</script>
