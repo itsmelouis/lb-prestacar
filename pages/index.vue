@@ -21,10 +21,11 @@
   </section>
   <section class="flex flex-col justify-center items-center my-10">
     <h3 class="font-semibold text-2xl text-center mb-4">Nos top véhicules</h3>
-    <div class="flex flex-row gap-8">
-      <CardCar />
-      <CardCar />
-      <CardCar />
+    <div class="flex flex-row gap-8 flex-wrap">
+      <CardCar title="brandon" id="1" image="https://lb-prestacar.com/assets/cox3-e064cf11.jpg" />
+      <CardCar title="brandon" id="2" image="https://lb-prestacar.com/assets/cox3-e064cf11.jpg" />
+      <CardCar title="brandon" id="3" image="https://lb-prestacar.com/assets/cox3-e064cf11.jpg" />
+
     </div>
     <NuxtLink to="/vehicules" class="mt-10">
       <Button label="Voir tous nos véhicules" severity="primary" />
