@@ -1,3 +1,5 @@
+import type { InputTextPassThroughOptions } from 'primevue/inputtext';
+
 export default {
     root: ({ props, context, parent }) => ({
         class: [
@@ -19,7 +21,7 @@ export default {
             { 'rounded-md': parent.instance.$name !== 'InputGroup' },
             { 'first:rounded-l-md rounded-none last:rounded-r-md': parent.instance.$name == 'InputGroup' },
             { 'border-0 border-y border-l last:border-r': parent.instance.$name == 'InputGroup' },
-            { 'first:ml-0 -ml-px': parent.instance.$name == 'InputGroup' && !props.showButtons },
+            { 'first:ml-0 -ml-px': parent.instance.$name == 'InputGroup'},
 
             // Colors
             'text-surface-600 dark:text-surface-200',
@@ -43,7 +45,14 @@ export default {
 
             // Misc
             'appearance-none',
-            'transition-colors duration-200'
+            'transition-colors duration-200',
+            
+            // New Styles for Search Input
+            'rounded-full border border-gray-300 p-3 pr-10',
+            'focus:border-gray-500',
+            'placeholder-gray-500',
+            'bg-white',
+            'relative'
         ]
     })
-};
+} satisfies InputTextPassThroughOptions;
