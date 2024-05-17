@@ -1,3 +1,5 @@
+import type { DropdownPassThroughOptions } from 'primevue/dropdown';
+
 export default {
     root: ({ props, state }) => ({
         class: [
@@ -21,8 +23,8 @@ export default {
             'duration-200',
 
             // States
-            { 'hover:border-primary-500 dark:hover:border-primary-300': !props.invalid },
-            { 'outline-none outline-offset-0 ring ring-primary-400/50 dark:ring-primary-300/50': state.focused },
+            { 'hover:border-slate-500 dark:hover:border-slate-300': !props.invalid },
+            { 'outline-none outline-offset-0 ring ring-slate-400/50 dark:ring-slate-300/50': state.focused },
 
             // Misc
             'cursor-pointer',
@@ -43,8 +45,8 @@ export default {
             // Color and Background
             'bg-transparent',
             'border-0',
-            { 'text-surface-800 dark:text-white/80': props.modelValue != undefined, 'text-surface-400 dark:text-surface-500': props.modelValue == undefined },
-            'placeholder:text-surface-400 dark:placeholder:text-surface-500',
+            { 'text-surface-800': props.modelValue != undefined, 'text-surface-400': props.modelValue == undefined },
+            'placeholder:text-surface-400',
 
             // Sizing and Spacing
             'w-[1%]',
@@ -93,14 +95,13 @@ export default {
             'absolute top-0 left-0',
 
             // Shape
-            'border-0 dark:border',
+            'border-0',
             'rounded-md',
             'shadow-md',
 
             // Color
-            'bg-surface-0 dark:bg-surface-800',
-            'text-surface-800 dark:text-white/80',
-            'dark:border-surface-700'
+            'bg-surface-0',
+            'text-surface-800'
         ]
     },
     wrapper: {
@@ -133,16 +134,16 @@ export default {
             'py-3 px-5',
 
             // Color
-            { 'text-surface-700 dark:text-white/80': !context.focused && !context.selected && !context.disabled },
-            { 'text-surface-600 dark:text-white/70': !context.focused && !context.selected && context.disabled },
-            { 'bg-surface-200 dark:bg-surface-600/60 text-surface-700 dark:text-white/80': context.focused && !context.selected },
-            { 'bg-primary-100 dark:bg-primary-400/40 text-primary-700 dark:text-white/80': context.focused && context.selected },
-            { 'bg-primary-50 dark:bg-primary-400/40 text-primary-700 dark:text-white/80': !context.focused && context.selected },
+            { 'text-surface-700': !context.focused && !context.selected && !context.disabled },
+            { 'text-surface-600': !context.focused && !context.selected && context.disabled },
+            { 'bg-surface-200 dark:bg-surface-600/60 text-surface-700': context.focused && !context.selected },
+            { 'bg-slate-100 dark:bg-slate-400/40 text-slate-700': context.focused && context.selected },
+            { 'bg-slate-50 dark:bg-slate-400/40 text-slate-700': !context.focused && context.selected },
 
             //States
             { 'hover:bg-surface-100 dark:hover:bg-surface-600/80': !context.focused && !context.selected },
-            { 'hover:text-surface-700 hover:bg-surface-100 dark:hover:text-white dark:hover:bg-surface-600/80': context.focused && !context.selected },
-            'focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:ring focus-visible:ring-inset focus-visible:ring-primary-400/50 dark:focus-visible:ring-primary-300/50',
+            { 'hover:text-surface-700 hover:bg-surface-100': context.focused && !context.selected },
+            'focus-visible:outline-none focus-visible:outline-offset-0 focus-visible:ring focus-visible:ring-inset focus-visible:ring-slate-400/50 dark:focus-visible:ring-slate-300/50',
 
             // Transitions
             'transition-shadow',
@@ -155,7 +156,7 @@ export default {
             'whitespace-nowrap'
         ]
     }),
-    itemgroup: {
+    itemGroup: {
         class: [
             //Font
             'font-bold',
@@ -165,14 +166,14 @@ export default {
             'py-3 px-5',
 
             // Color
-            'text-surface-800 dark:text-white/80',
-            'bg-surface-0 dark:bg-surface-600/80',
+            'text-surface-800',
+            'bg-surface-0',
 
             // Misc
             'cursor-auto'
         ]
     },
-    emptymessage: {
+    emptyMessage: {
         class: [
             // Font
             'leading-none',
@@ -181,7 +182,7 @@ export default {
             'py-3 px-5',
 
             // Color
-            'text-surface-800 dark:text-white/80',
+            'text-surface-800',
             'bg-transparent'
         ]
     },
@@ -197,15 +198,15 @@ export default {
             'rounded-tr-md',
 
             // Color
-            'text-surface-700 dark:text-white/80',
-            'bg-surface-100 dark:bg-surface-800',
+            'text-surface-700',
+            'bg-surface-100',
             'border-surface-300 dark:border-surface-700'
         ]
     },
-    filtercontainer: {
+    filterContainer: {
         class: 'relative'
     },
-    filterinput: {
+    filterInput: {
         class: [
             // Font
             'font-sans',
@@ -217,7 +218,7 @@ export default {
             'w-full',
 
             //Color
-            'text-surface-700 dark:text-white/80',
+            'text-surface-700',
             'bg-surface-0 dark:bg-surface-900',
             'border-surface-200 dark:border-surface-700',
 
@@ -231,18 +232,18 @@ export default {
             'duration-200',
 
             // States
-            'hover:border-primary-500 dark:hover:border-primary-300',
+            'hover:border-slate-500 dark:hover:border-slate-300',
             'focus:ring focus:outline-none focus:outline-offset-0',
-            'focus:ring-primary-400/50 dark:focus:ring-primary-300/50',
+            'focus:ring-slate-400/50 dark:focus:ring-slate-300/50',
 
             // Misc
             'appearance-none'
         ]
     },
-    filtericon: {
+    filterIcon: {
         class: ['absolute', 'top-1/2 right-3', '-mt-2']
     },
-    clearicon: {
+    clearIcon: {
         class: [
             // Color
             'text-surface-500',
@@ -262,4 +263,4 @@ export default {
         leaveActiveClass: 'transition-opacity duration-100 ease-linear',
         leaveToClass: 'opacity-0'
     }
-};
+} satisfies DropdownPassThroughOptions;
