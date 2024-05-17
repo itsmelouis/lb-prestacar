@@ -6,7 +6,7 @@
           <Icon name="material-symbols:search-rounded" size="24px" class="z-50 absolute top-1/2 transform -translate-y-1/2 right-3 text-surface-400" />
           <InputText v-model="search" placeholder="Rechercher un véhicule" class="w-full" />
         </span>
-        <MultiSelect v-model="selectedCategories" :options="categories" optionLabel="nom" placeholder="Sélectionner des catégories" :maxSelectedLabels="3" class="w-full md:w-20rem" />
+        <MultiSelect v-model="selectedCategories" :options="categories" optionLabel="nom" placeholder="Sélectionner des catégories" :maxSelectedLabels="3" class="w-full md:w-20" />
       </div>
       <section class="w-full flex flex-col items-center my-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-10">
