@@ -18,6 +18,7 @@
             :image="car.nom_image" 
             :description="car.description"
             :price="car.GrillesTarifiaires[0]?.prix.toString()"
+            displayTitle
           />
         </div>
       </section>
