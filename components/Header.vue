@@ -1,7 +1,10 @@
+<script setup lang="ts">
+</script>
+
 <template>
-  <header class="bg-white fixed w-full z-20 top-0 start-0 shadow-[rgba(0,0,0,0.24)_0px_3px_8px]">
+  <header class="bg-white fixed w-full z-20 top-0 start-0 shadow-[rgba(0,0,0,0.24)_0px_3px_8px] py-4">
     <div class="container mx-auto md:flex md:justify-between md:items-center">
-      <img class="h-24 sm:h-28" src="/logo_prestacar.png" alt="Logo prestacar">
+      <img src="/logo-white.svg" alt="Logo prestacar" width="150" />
       <div class="flex flex-row gap-6 items-center">
         <nav class="flex flex-row items-center font-semibold gap-6">
           <RouterLink to="/vehicules" class="group relative flex items-center justify-center self-stretch">

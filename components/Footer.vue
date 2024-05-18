@@ -2,8 +2,7 @@
   <div
     class="flex flex-col sm:flex-row sm:justify-between sm:items-center bottom-0 py-10 px-4 sm:px-52 space-y-5">
     <div class="mb-6 sm:mb-0 self-center">
-      <img src="/logo_prestacar.png" alt="Logo de PrestaCar"
-        class="w-32 h32 md:w-36 md:h-36 lg:w-40 lg:h-40" />
+      <img src="/logo-white.svg" alt="Logo de PrestaCar" width="150" />
     </div>
     <div class="space-y-2 sm:ml-16">
       <h3>Entreprise</h3>
