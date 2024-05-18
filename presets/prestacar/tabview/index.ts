@@ -63,7 +63,7 @@ export default {
   nav: {
     class: [
       // Flexbox
-      "flex",
+      "flex items-center justify-center",
       "flex-1",
       // "justify-center",
       // "items-center",
