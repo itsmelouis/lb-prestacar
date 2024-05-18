@@ -14,6 +14,10 @@ export default eventHandler(async (event) => {
     where: {
       id: id,
     },
+    include: {
+      Options: true,
+      GrillesTarifiaires: true,
+    },
   });
 
   if(!voiture) {
