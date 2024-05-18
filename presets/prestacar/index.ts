@@ -8,6 +8,9 @@ import tabview from './tabview';
 import tag from './tag';
 import image from './image';
 import rating from './rating';
+import inputtext from './inputtext';
+import dropdown from './dropdown';
+import multiselect from './multiselect';
 
 export default {
     global,
@@ -18,7 +21,10 @@ export default {
     button,
     card,
     carousel,
+    dropdown,
     image,
+    inputtext,
+    multiselect,
     rating,
     tabview,
     tag,
