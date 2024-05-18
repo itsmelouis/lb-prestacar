@@ -105,3 +105,10 @@ watch(reviews, (value) => {
   console.log(value)
 });
 </script>
+
+
+<style>
+li[data-pc-section="inkbar"] {
+  width: 0 !important;
+}
+</style>
