@@ -94,13 +94,12 @@ export default {
   item: ({ props }) => ({
     class: [
       // Flexbox
-      "flex shrink-0 grow",
+      "flex shrink-0 items-center justify-center",
+
+      
 
       // Width
-      {
-        "w-1/3": props.orientation !== "vertical",
-        "w-full": props.orientation == "vertical",
-      },
+      "w-full",
     ],
   }),
   indicators: {
@@ -118,18 +117,18 @@ export default {
   indicatorButton: ({ context }) => ({
     class: [
       // Sizing & Shape
-      "w-8 h-2 rounded-0",
+      "w-8 h-2 rounded-lg",
 
       // Transitions
       "transition duration-200",
 
       // Focus Styles
-      "focus:outline-none focus:outline-offset-0 focus:ring focus:ring-primary-400/50 dark:focus:ring-primary-300/50",
+      "focus:outline-none focus:outline-offset-0 focus:ring focus:ring-slate-400/50",
 
       // Color & Background
       {
-        "bg-surface-200 hover:bg-surface-300 dark:bg-surface-700 dark:hover:bg-surface-600": !context.highlighted,
-        "bg-primary-500 hover:bg-primary-600": context.highlighted,
+        "bg-slate-200 hover:bg-slate-300 ": !context.highlighted,
+        "bg-yellow-500 hover:bg-yellow-600": context.highlighted,
       },
     ],
   }),
