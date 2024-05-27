@@ -11,6 +11,11 @@ import rating from './rating';
 import inputtext from './inputtext';
 import dropdown from './dropdown';
 import multiselect from './multiselect';
+import autocomplete from './autocomplete';
+import floatlabel from './floatlabel';
+import calendar from './calendar';
+import textarea from './textarea';
+import checkbox from './checkbox';
 
 export default {
     global,
@@ -18,14 +23,19 @@ export default {
         ripple
     },
     accordion,
+    autocomplete,
     button,
+    calendar,
     card,
     carousel,
+    checkbox,
     dropdown,
+    floatlabel,
     image,
     inputtext,
     multiselect,
     rating,
     tabview,
     tag,
+    textarea,
 }

@@ -1,10 +1,12 @@
+import type { FloatLabelPassThroughOptions } from "primevue/floatlabel";
+
 export default {
     root: {
         class: [
             'block relative',
 
             // Base Label Appearance
-            '[&>*:last-child]:text-surface-900/60 dark:[&>*:last-child]:text-white/60',
+            '[&>*:last-child]:text-surface-900/60',
             '[&>*:last-child]:absolute',
             '[&>*:last-child]:top-1/2',
             '[&>*:last-child]:-translate-y-1/2',
@@ -23,4 +25,4 @@ export default {
             '[&>*:last-child]:has-[.filled]:text-sm'
         ]
     }
-};
+} satisfies FloatLabelPassThroughOptions;
