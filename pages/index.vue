@@ -28,7 +28,7 @@
 
     </div>
     <NuxtLink to="/vehicules" class="mt-10">
-      <Button label="Voir tous nos véhicules" severity="primary" />
+      <Button label="Voir tout nos véhicules" severity="primary" />
     </NuxtLink>
   </section>
   <section class="relative w-full py-12">
@@ -70,11 +70,11 @@
       </template>
     </Carousel>
   </section>
-  <section class="relative mx-52 py-12">
+  <section class="relative flex justify-center items-center flex-col py-12">
     <h3 class="font-semibold text-2xl text-center mb-4">FAQ :</h3>
-    <Accordion :activeIndex="0">
+    <Accordion :activeIndex="0" class="w-full lg:w-auto">
       <AccordionTab v-for="tab in tabs" :key="tab.title" :header="tab.title">
-        <p>{{ tab.content }}</p>
+        <p class="m-0">{{ tab.content }}</p>
       </AccordionTab>
     </Accordion>
   </section>
@@ -127,7 +127,7 @@ const responsiveOptions = ref([
   },
   {
     breakpoint: '767px',
-    numVisible: 2,
+    numVisible: 1,
     numScroll: 1
   },
   {
