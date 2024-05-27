@@ -1,12 +1,12 @@
 <template>
-  <div class="mt-32">
+  <div>
     <section class="relative">
       <img alt="Luxury vehicle" class="w-full h-auto" height="500" src="/hero_limo.png" />
       <div
         class="absolute left-10 bottom-10 flex flex-col justify-center items-start p-8 max-w-fit max-h-fit rounded-lg">
         <h2 class="text-3xl font-bold text-white">{{ cars?.nom }}</h2>
         <div class="mt-4 space-x-4">
-            <Button label="Voir les tarifs" severity="primary" @click="activeTabIndex = 1" />
+          <Button label="Voir les tarifs" severity="primary" @click="activeTabIndex = 1" />
           <NuxtLink to="/contact">
             <Button label="Devis personnalisé" severity="secondary" />
           </NuxtLink>
@@ -17,15 +17,18 @@
     <section class="mt-16 px-8">
       <TabView v-model:activeIndex="activeTabIndex">
         <TabPanel header="Détails du véhicule">
-          <Carousel :value="products" :numVisible="1" :numScroll="1">
-            <template #item="slotProps">
-              <Image :src="slotProps.data.image" :alt="slotProps.data.name" preview>
-                <template #indicatoricon>
-                  <Icon name="material-symbols:search" size="24" class="text-white" />
-                </template>
-              </Image>
-            </template>
-          </Carousel>
+          <div class="w-full">
+            <Carousel :value="products" :numVisible="3" :numScroll="3" :responsiveOptions="responsiveOptions"
+              :pt="{ item: { class: ['flex shrink-0 grow w-full'] } }">
+              <template #item="slotProps">
+                <Image :src="slotProps.data.image" :alt="slotProps.data.name" preview>
+                  <template #indicatoricon>
+                    <Icon name="material-symbols:search" size="24" class="text-white" />
+                  </template>
+                </Image>
+              </template>
+            </Carousel>
+          </div>
           {{ cars?.description }}
         </TabPanel>
         <TabPanel header="Tarifs">
@@ -37,11 +40,10 @@
     <section class="mt-16 px-8">
       <h2 class="text-3xl font-bold text-center">Comment nos clients parlent de nous :</h2>
       <div class="mt-8 flex justify-center items-center flex-col space-y-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <ul v-for="review in reviews" :key="review.nom" class="w-full max-w-xl">
-            <CardReview :firstname="review.prenom" :name="review.nom" :message="review.message" />
-          </ul>
-        </div>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center w-full">
+          <CardReview v-for="review in reviews" :key="review.nom" :firstname="review.prenom" :name="review.nom"
+            :message="review.message" />
+        </ul>
       </div>
       <div class="flex justify-center items-center mt-12">
         <NuxtLink to="/avis">
@@ -77,6 +79,29 @@ const products = ref([
   { image: '/hero_cadillac.jpeg', },
 
 ])
+
+const responsiveOptions = ref([
+  {
+    breakpoint: '1400px',
+    numVisible: 1,
+    numScroll: 1
+  },
+  {
+    breakpoint: '1199px',
+    numVisible: 1,
+    numScroll: 1
+  },
+  {
+    breakpoint: '767px',
+    numVisible: 1,
+    numScroll: 1
+  },
+  {
+    breakpoint: '575px',
+    numVisible: 1,
+    numScroll: 1
+  }
+]);
 
 useFetch<Voiture>(`/api/car/${route.params.id}`)
   .then((response) => {
