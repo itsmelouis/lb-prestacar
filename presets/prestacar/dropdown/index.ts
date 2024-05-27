@@ -11,7 +11,7 @@ export default {
             'rounded-md',
 
             // Color and Background
-            'bg-surface-0 dark:bg-surface-900',
+            'bg-white',
             'border',
             { 'border-surface-300 dark:border-surface-600': !props.invalid },
 
@@ -100,7 +100,7 @@ export default {
             'shadow-md',
 
             // Color
-            'bg-surface-0',
+            'bg-white',
             'text-surface-800'
         ]
     },

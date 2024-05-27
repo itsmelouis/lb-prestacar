@@ -5,7 +5,7 @@ interface CardCarProps {
   title: string
   description?: string
   image: string
-  price? : string
+  price?: string
   displayTitle?: boolean
 }
 
@@ -18,9 +18,12 @@ const props = defineProps<CardCarProps>()
     <div class="absolute top-2 right-2 z-10">
       <Tag class="inline-block" :value="`à partir de ${props.price ?? '200'}€`" />
     </div>
-    <div class="w-80 h-80 overflow-hidden rounded-xl">
-      <img :alt="`${props.title}`" class="object-cover transition-transform duration-300 hover:scale-105 w-full h-full" :src="props.image" />
-    </div>
+    <NuxtLink :to="`/vehicules/${props.id}`">
+      <div class="w-80 h-80 overflow-hidden rounded-xl">
+        <img :alt="`${props.title}`"
+          class="object-cover transition-transform duration-300 hover:scale-105 w-full h-full" :src="props.image" />
+      </div>
+    </NuxtLink>
     <div class="flex flex-col justify-center items-center my-2">
       <div v-if="props.displayTitle" class="py-4">
         <h3 class="font-bold text-base md:text-lg lg:text-xl">{{ props.title }}</h3>

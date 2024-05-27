@@ -11,7 +11,7 @@ export default {
     }),
     headerAction: ({ context }: AccordionTabPassThroughMethodOptions) => ({
       class: [
-        //Font
+        // Font
         "font-bold",
         "leading-none",
 
@@ -21,10 +21,12 @@ export default {
 
         // Sizing
         "p-5",
+        "md:p-4", // Adjust padding for medium screens
+        "sm:p-3", // Adjust padding for small screens
 
         // Color
-        "border-b border-black ",
-        "text-slate-600 ",
+        "border-b border-black",
+        "text-slate-600",
         { "text-slate-900": context.active },
 
         // Transition
@@ -32,7 +34,7 @@ export default {
         "transition-shadow duration-200",
 
         // States
-        "hover:bg-slate-50 ",
+        "hover:bg-slate-50",
         "hover:text-slate-900",
 
         // Misc
@@ -49,9 +51,11 @@ export default {
       class: [
         // Spacing
         "p-5",
+        "md:p-4", // Adjust padding for medium screens
+        "sm:p-3", // Adjust padding for small screens
 
         // Color
-        "text-slate-700 ",
+        "text-slate-700",
       ],
     },
     transition: {

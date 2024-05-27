@@ -3,6 +3,7 @@ import type { InputTextPassThroughOptions } from 'primevue/inputtext';
 export default {
     root: ({ props, context, parent }) => ({
         class: [
+            "block w-full",
             // Font
             'font-sans leading-none',
 
@@ -41,12 +42,12 @@ export default {
             },
 
             // Filled State *for FloatLabel
-            { filled: parent.instance?.$name == 'FloatLabel' && context.filled },
+            { 'filled': parent.instance?.$name == 'FloatLabel' && context.filled },
 
             // Misc
             'appearance-none',
             'transition-colors duration-200',
-            
+
             // New Styles for Search Input
             'rounded-full border border-gray-300 p-3 pr-10',
             'focus:border-gray-500',
