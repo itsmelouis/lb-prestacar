@@ -38,7 +38,7 @@ export default {
         ]
     }),
     labelContainer: {
-        class: 'overflow-hidden flex flex-auto cursor-pointer '
+        class: 'overflow-hidden flex flex-auto cursor-pointer'
     },
     label: ({ props }) => ({
         class: [
@@ -114,7 +114,7 @@ export default {
         class: [
             // Colors
             'bg-surface-0 dark:bg-surface-900',
-            'text-surface-700 dark:text-white/80',
+            'text-surface-700 dark:text-white/80', // Ensuring text is visible
 
             // Shape
             'border border-surface-300 dark:border-surface-700',
@@ -285,7 +285,7 @@ export default {
                 // Colors
                 {
                     'border-surface-300 dark:border-surface-700': !context.checked && !props.invalid,
-                    'bg-surface-0  dark:bg-surface-950': !context.checked && !props.invalid && !props.disabled,
+                    'bg-surface-0 dark:bg-surface-950': !context.checked && !props.invalid && !props.disabled,
                     'border-primary bg-primary': context.checked
                 },
 

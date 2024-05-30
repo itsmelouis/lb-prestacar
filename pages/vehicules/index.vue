@@ -73,6 +73,7 @@ const selectedCategories = ref<number[]>([]);
 const fetchCars = async () => {
   try {
     cars.value = await $fetch<Voiture[]>('/api/car');
+    console.log('Voitures récupérées:', cars.value);
   } catch (error) {
     console.error('Failed to fetch cars:', error);
   }
@@ -82,6 +83,7 @@ const fetchCars = async () => {
 const fetchCategories = async () => {
   try {
     categories.value = await $fetch<Categorie[]>('/api/category');
+    console.log('Catégories récupérées:', categories.value);
   } catch (error) {
     console.error('Failed to fetch categories:', error);
   }
@@ -98,6 +100,7 @@ const filteredCars = computed(() => {
   return cars.value.filter(car => {
     const matchesSearch = car.nom.toLowerCase().includes(search.value.toLowerCase());
     const matchesCategory = selectedCategories.value.length === 0 || selectedCategories.value.includes(car.id_categorie);
+    console.log('Voiture:', car.nom, 'Correspond à la recherche:', matchesSearch, 'Correspond à la catégorie:', matchesCategory);
     return matchesSearch && matchesCategory;
   });
 });
