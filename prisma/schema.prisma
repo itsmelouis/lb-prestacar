@@ -2,8 +2,9 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
@@ -17,18 +18,18 @@ model Avis {
   email        String
   message      String
   estValide    Boolean  @default(false)
-  estRgpd      Boolean? 
-  estCondition Boolean? 
+  estRgpd      Boolean?
+  estCondition Boolean?
 }
 
 model Voiture {
-  id               Int                 @id @default(autoincrement())
-  nom              String
-  nom_image        String
-  description      String
-  id_categorie     Int
-  Categorie        Categorie          @relation(fields: [id_categorie], references: [id])
-  Options          Option[]
+  id                 Int                @id @default(autoincrement())
+  nom                String
+  nom_image          String
+  description        String
+  id_categorie       Int
+  Categorie          Categorie          @relation(fields: [id_categorie], references: [id])
+  Options            Option[]
   GrillesTarifiaires GrilleTarifiaire[]
 }
 
@@ -61,14 +62,14 @@ model Utilisateur {
 }
 
 model Contact {
-  id               Int     @id @default(autoincrement())
-  prenom           String
-  nom              String
-  telephone        String?
-  email            String?
-  type_prestation  String
-  date_presation   DateTime
-  message          String
-  estCondition     Boolean?
-  estRgpd          Boolean?
+  id              Int      @id @default(autoincrement())
+  prenom          String
+  nom             String
+  telephone       String?
+  email           String?
+  type_prestation String
+  date_presation  DateTime
+  message         String
+  estCondition    Boolean?
+  estRgpd         Boolean?
 }
