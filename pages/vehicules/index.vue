@@ -3,7 +3,7 @@
     <div class="w-full max-w-7xl flex flex-col items-center">
       <div class="w-full max-w-lg mb-6 flex gap-4">
         <span class="relative flex-1">
-          <Icon name="material-symbols:search-rounded" size="24px" class="z-50 absolute top-1/2 transform -translate-y-1/2 right-3 text-surface-400" />
+          <Icon name="material-symbols:search-rounded" size="24px" class="z-50 absolute top-1/2 transform -translate-y-1/2 right-3" />
           <InputText v-model="search" placeholder="Rechercher un véhicule" class="w-full" />
         </span>
         <MultiSelect v-model="selectedCategories" :options="categories" optionLabel="nom" placeholder="Sélectionner des catégories" :maxSelectedLabels="3" class="w-full md:w-20" />
