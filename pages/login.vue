@@ -32,9 +32,6 @@
   </template>
   
   <script setup lang="ts">
-  import { ref } from 'vue';
-  import InputText from 'primevue/inputtext';
-  import Button from 'primevue/button';
   
   const username = ref('');
   const password = ref('');
