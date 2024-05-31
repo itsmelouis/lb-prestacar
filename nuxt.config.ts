@@ -1,4 +1,3 @@
-import path from 'path';
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
