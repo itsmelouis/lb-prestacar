@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     options: {
       unstyled: true
     },
-    importPT: { from: path.resolve(__dirname, './presets/prestacar/') }
+    importPT: { from: '~/presets/prestacar/' }
   },
   devtools: { enabled: false },
   tailwindcss: 
