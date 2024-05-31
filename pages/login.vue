@@ -32,15 +32,12 @@
   </template>
   
   <script setup lang="ts">
-  import { ref } from 'vue';
-  import InputText from 'primevue/inputtext';
-  import Button from 'primevue/button';
   
   const username = ref('');
   const password = ref('');
   
   const handleSubmit = () => {
-    // Il faut mettre la logique de connexion ici !
+    // Il faut mettre la logique de connexion ici
     // J'ai mis un console.log pour afficher les valeurs des champs pour le moment
     console.log('Identifiant:', username.value);
     console.log('Mot de passe:', password.value);
