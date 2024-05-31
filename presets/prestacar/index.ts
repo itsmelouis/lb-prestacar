@@ -2,6 +2,7 @@ import accordion from './accordion';
 import button from './button';
 import card from './card';
 import carousel from './carousel';
+import datatable from './datatable';
 import global from './global';
 import ripple from './ripple';
 import tabview from './tabview';
