@@ -3,10 +3,10 @@
     <div class="w-full max-w-7xl flex flex-col items-center">
       <div class="w-full max-w-lg mb-6 flex gap-4">
         <span class="relative flex-1">
-          <Icon name="material-symbols:search-rounded" size="24px" class="z-50 absolute top-1/2 transform -translate-y-1/2 right-3 text-surface-400" />
+          <Icon name="material-symbols:search-rounded" size="24px" class="z-50 absolute top-1/2 transform -translate-y-1/2 right-3" />
           <InputText v-model="search" placeholder="Rechercher un véhicule" class="w-full" />
         </span>
-        <MultiSelect v-model="selectedCategories" :options="categories" optionLabel="nom" placeholder="Sélectionner des catégories" :maxSelectedLabels="3" class="w-full md:w-20" />
+        <MultiSelect v-model="selectedCategories" :options="categories" optionValue="id" optionLabel="nom" placeholder="Sélectionner des catégories" :maxSelectedLabels="3" class="w-full md:w-20" />
       </div>
       <section class="w-full flex flex-col items-center my-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-10">
@@ -73,6 +73,7 @@ const selectedCategories = ref<number[]>([]);
 const fetchCars = async () => {
   try {
     cars.value = await $fetch<Voiture[]>('/api/car');
+    console.log('Voitures récupérées:', cars.value);
   } catch (error) {
     console.error('Failed to fetch cars:', error);
   }
@@ -82,6 +83,7 @@ const fetchCars = async () => {
 const fetchCategories = async () => {
   try {
     categories.value = await $fetch<Categorie[]>('/api/category');
+    console.log('Catégories récupérées:', categories.value);
   } catch (error) {
     console.error('Failed to fetch categories:', error);
   }
@@ -98,6 +100,7 @@ const filteredCars = computed(() => {
   return cars.value.filter(car => {
     const matchesSearch = car.nom.toLowerCase().includes(search.value.toLowerCase());
     const matchesCategory = selectedCategories.value.length === 0 || selectedCategories.value.includes(car.id_categorie);
+    console.log('Voiture:', car.nom, 'Correspond à la recherche:', matchesSearch, 'Correspond à la catégorie:', matchesCategory);
     return matchesSearch && matchesCategory;
   });
 });
