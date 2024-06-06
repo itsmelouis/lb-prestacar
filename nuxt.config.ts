@@ -2,7 +2,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     'nuxt-icon',
-    'nuxt-primevue'
+    'nuxt-primevue',
+    '@nuxtjs/cloudinary'
   ],
   primevue: {
     options: {
