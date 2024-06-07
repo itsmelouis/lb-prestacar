@@ -129,8 +129,8 @@ export default {
         // Color
         props.sortable && context.sorted ? "bg-yellow-50 text-yellow-700" : "bg-slate-50 text-slate-700",
         props.sortable && context.sorted
-          ? "dark:text-white"
-          : "dark:text-white/80",
+          ? ""
+          : "",
         "border-slate-200 ",
 
         // States
@@ -155,7 +155,7 @@ export default {
     sort: ({ context }: ColumnPassThroughMethodOptions) => ({
       class: [
         context.sorted ? "text-yellow-500" : "text-slate-700",
-        context.sorted ? "dark:text-yellow-400" : "dark:text-white/80",
+        context.sorted ? "" : "",
       ],
     }),
     bodyCell: ({ props, context, state, parent }: ColumnPassThroughMethodOptions & { state: ColumnState }) => ({
@@ -244,7 +244,7 @@ export default {
         // Color
         "bg-white",
         "text-slate-800",
-        "dark:border-slate-700",
+        "",
       ],
     },
     filterMatchModeDropdown: {
@@ -435,7 +435,7 @@ export default {
           // Color
           "bg-white",
           "text-slate-800",
-          "dark:border-slate-700",
+          "",
         ],
       },
       item: ({ context }: DropdownPassThroughMethodOptions<ColumnPassThroughOptionType>) => ({
@@ -644,7 +644,7 @@ export default {
 
         // Color
         { "bg-yellow-50 text-yellow-700": context.active },
-        "dark:text-white/70",
+        "",
 
         // States
         "hover:text-slate-700 hover:bg-slate-300/20",
@@ -1051,7 +1051,7 @@ export default {
   bodyRow: ({ context, props }) => ({
     class: [
       // Color
-      "dark:text-white/80",
+      "",
       { "bg-yellow-50 text-yellow-700": context.selected },
       { "bg-white text-slate-600": !context.selected },
       {
@@ -1077,10 +1077,10 @@ export default {
     class: "bg-white text-slate-600",
   },
   rowGroupHeader: {
-    class: ["sticky z-20", "bg-white text-slate-600", "dark:bg-slate-800"],
+    class: ["sticky z-20", "bg-white text-slate-600", ""],
   },
   rowGroupFooter: {
-    class: ["sticky z-20", "bg-white text-slate-600", "dark:bg-slate-800"],
+    class: ["sticky z-20", "bg-white text-slate-600", ""],
   },
   resizeHelper: {
     class: "absolute hidden w-[2px] z-20 bg-yellow-500",

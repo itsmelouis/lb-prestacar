@@ -30,6 +30,7 @@ export default {
     card,
     carousel,
     checkbox,
+    datatable,
     dropdown,
     floatlabel,
     image,
