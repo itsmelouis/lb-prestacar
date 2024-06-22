@@ -1,3 +1,5 @@
+import type { DialogPassThroughOptions } from "primevue/dialog";
+
 export default {
     root: ({ state }) => ({
         class: [
@@ -89,7 +91,7 @@ export default {
             'overflow-hidden'
         ]
     },
-    maximizablebutton: {
+    maximizableButton: {
         class: [
             'relative',
 
@@ -132,7 +134,7 @@ export default {
             'h-4'
         ]
     },
-    maximizableicon: {
+    maximizableIcon: {
         class: [
             // Display
             'inline-block',
@@ -190,7 +192,6 @@ export default {
             // Transitions
             'transition-all',
             'duration-300',
-            { 'p-5': !props.position == 'full' },
 
             // Background and Effects
             { 'has-[.mask-active]:bg-transparent bg-black/40': props.modal, 'has-[.mask-active]:backdrop-blur-none backdrop-blur-sm': props.modal }
@@ -232,4 +233,4 @@ export default {
                   leaveToClass: 'opacity-0 scale-75 mask-active'
               };
     }
-};
+} satisfies DialogPassThroughOptions;
