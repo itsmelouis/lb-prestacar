@@ -6,10 +6,9 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     return {};
   }
 
-  const { data: session, refresh: updateSession }
-   = await useFetch<AuthSession>('/api/auth/session');
+  const { data: session, refresh: updateSession } = await useFetch<AuthSession>('/api/auth/session');
 
-  const loggedIn: any = computed(() => !!session.value?.email);
+  const loggedIn = computed(() => !!session.value?.email);
 
   // Create a ref to know where to redirect the user when logged in
   const redirectTo = useState("authRedirect")
@@ -21,13 +20,13 @@ export default defineNuxtPlugin(async (nuxtApp) => {
    *  auth: true
    * })
    */
-  // 
 
   addRouteMiddleware(
     "auth",
     (to) => {
-      if (to.meta.auth && !loggedIn.value) {
-        redirectTo.value = to.path
+      // Check if the route requires auth or is under /admin/
+      if ((to.meta.auth || to.path.startsWith('/admin')) && !loggedIn.value) {
+        redirectTo.value = to.path;
         return "/";
       }
     },
@@ -38,8 +37,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
   if (process.client) {
     watch(loggedIn, async (loggedIn) => {
-      if (!loggedIn && currentRoute.meta.auth) {
-        redirectTo.value = currentRoute.path
+      if (!loggedIn && (currentRoute.meta.auth || currentRoute.path.startsWith('/admin'))) {
+        redirectTo.value = currentRoute.path;
         await navigateTo("/");
       }
     });
