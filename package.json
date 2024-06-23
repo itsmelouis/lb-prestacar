@@ -19,6 +19,7 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@nuxtjs/cloudinary": "^3.0.0-rc.1",
     "@prisma/client": "^5.10.2",
     "bcrypt": "^5.1.1",
     "jsonwebtoken": "^9.0.2",

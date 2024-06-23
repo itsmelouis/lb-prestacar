@@ -14,7 +14,7 @@ interface CarBody {
   name: string;
   pictureName: string;
   description: string;
-  idCategory: number;
+  idCategory: number[];
   options: OptionsBody[];
   prices: PricesBody[];
 }
@@ -22,8 +22,7 @@ interface CarBody {
 export default eventHandler<{ body: CarBody }>(async (event) => {
   await requireAuthSession(event);
   const { name, pictureName, description, idCategory, options, prices } = await readBody(event);
-  console.log(options);
-  
+
   if (!name || !pictureName || !description || !options.length || !prices.length) {
     throw createError({
       message: "Tous les champs sont obligatoires.",
@@ -31,55 +30,68 @@ export default eventHandler<{ body: CarBody }>(async (event) => {
     });
   }
 
-  const category = await prisma.categorie.findUnique({
-    where: {
-      id: idCategory,
-    },
-  });
+  // const category = await prisma.categorie.findUnique({
+  //   where: {
+  //     id: idCategory,
+  //   },
+  // });
 
-  if (!category) {
-    throw createError({
-      message: "La catégorie n'existe pas.",
-      statusCode: 400,
-    });
-  }
+  // if (!category) {
+  //   throw createError({
+  //     message: "La catégorie n'existe pas.",
+  //     statusCode: 400,
+  //   });
+  // }
+
+  const categoriesData = idCategory.map(id => ({
+    categorieId: id,
+  }));
+
 
   const voiture = await prisma.voiture.create({
     data: {
       nom: name,
       nom_image: pictureName,
       description: description,
-      id_categorie: idCategory
+      Categories: {
+        createMany: {
+          data: categoriesData,
+          skipDuplicates: true,
+        },
+      },
     },
   });
-  
-  if(!voiture) {
+
+  if (!voiture) {
     throw createError({
       message: "Une erreur est survenue lors de la création de la voiture.",
       statusCode: 500,
     });
   }
 
+  // Créer les options en utilisant createMany
+  const optionsData = options.map(option => ({
+    intitule: option.name,
+    prix: option.price,
+    voitureId: voiture.id,
+  }));
 
-  for (const option of options) {
-    await prisma.option.create({
-      data: {
-        intitule: option.name,
-        prix: option.price,
-        id_voiture: voiture.id,
-      },
-    });
-  }
+  await prisma.option.createMany({
+    data: optionsData,
+    skipDuplicates: true,
+  });
 
-  for (const price of prices) {
-    await prisma.grilleTarifiaire.create({
-      data: {
-        temps: price.duration,
-        prix: price.price,
-        id_voiture: voiture.id,
-      },
-    });
-  }
+  // Créer les grilles tarifaires en utilisant createMany
+  const pricesData = prices.map(price => ({
+    temps: price.duration,
+    prix: price.price,
+    voitureId: voiture.id,
+  }));
+
+  await prisma.grilleTarifiaire.createMany({
+    data: pricesData,
+    skipDuplicates: true,
+  });
 
   return voiture;
 });

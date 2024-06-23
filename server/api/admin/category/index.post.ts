@@ -5,6 +5,7 @@ interface CategoryBody {
 }
 
 export default eventHandler<{ body: CategoryBody }>(async (event) => {
+  await requireAuthSession(event);
   const { nom } = await readBody(event);
   if (!nom) {
     throw createError({
