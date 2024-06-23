@@ -22,6 +22,7 @@
     "@nuxtjs/cloudinary": "^3.0.0-rc.1",
     "@prisma/client": "^5.10.2",
     "bcrypt": "^5.1.1",
+    "cloudinary": "^2.2.0",
     "jsonwebtoken": "^9.0.2",
     "primevue": "^3.51.0",
     "resend": "^3.2.0"

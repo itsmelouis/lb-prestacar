@@ -1,3 +1,5 @@
+import type { GalleriaPassThroughOptions } from "primevue/galleria";
+
 export default {
     content: ({ parent, props }) => ({
         class: [
@@ -11,7 +13,7 @@ export default {
             }
         ]
     }),
-    itemwrapper: ({ parent, props }) => ({
+    itemWrapper: ({ parent, props }) => ({
         class: [
             'group',
             'flex relative',
@@ -29,7 +31,7 @@ export default {
         ]
     }),
 
-    itemcontainer: ({ parent }) => ({
+    itemContainer: ({ parent }) => ({
         class: [
             'flex h-full relative',
             {
@@ -47,7 +49,7 @@ export default {
             'h-full w-full'
         ]
     },
-    thumbnailwrapper: ({ parent }) => ({
+    thumbnailWrapper: ({ parent }) => ({
         class: [
             // Flex
             'flex flex-col shrink-0',
@@ -60,7 +62,7 @@ export default {
             'overflow-auto'
         ]
     }),
-    thumbnailcontainer: ({ parent }) => ({
+    thumbnailContainer: ({ parent }) => ({
         class: [
             // Flex
             'flex',
@@ -77,7 +79,7 @@ export default {
             }
         ]
     }),
-    previousthumbnailbutton: {
+    previousThumbnailButton: {
         class: [
             // Positioning
             'self-center relative',
@@ -92,16 +94,16 @@ export default {
             'bg-transparent text-white w-8 h-8 rounded-full transition duration-200 ease-in-out',
 
             // Hover Effects
-            'hover:bg-surface-0/10 hover:text-white',
+            'hover:bg-white/10 hover:text-white',
 
             // Focus Effects
-            'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-primary-400/50 dark:focus:ring-primary-300/50'
+            'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-yellow-400/50'
         ]
     },
-    thumbnailitemscontainer: {
+    thumbnailItemsContainer: {
         class: 'overflow-hidden w-full'
     },
-    thumbnailitems: ({ parent }) => ({
+    thumbnailItems: ({ parent }) => ({
         class: [
             'flex',
             {
@@ -109,7 +111,7 @@ export default {
             }
         ]
     }),
-    thumbnailitem: ({ parent }) => ({
+    thumbnailItem: ({ parent }) => ({
         class: [
             // Flexbox
             'flex items-center justify-center',
@@ -131,7 +133,7 @@ export default {
             'hover:duration-300'
         ]
     }),
-    nextthumbnailbutton: {
+    nextThumbnailButton: {
         class: [
             // Positioning
             'self-center relative',
@@ -146,10 +148,10 @@ export default {
             'bg-transparent text-white w-8 h-8 rounded-full transition duration-200 ease-in-out',
 
             // Hover Effects
-            'hover:bg-surface-0/10 hover:text-white',
+            'hover:bg-white/10 hover:text-white',
 
             // Focus Effects
-            'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-primary-400/50 dark:focus:ring-primary-300/50'
+            'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-yellow-400/50'
         ]
     },
     indicators: ({ parent }) => ({
@@ -187,7 +189,7 @@ export default {
             }
         ]
     }),
-    indicatorbutton: ({ context }) => ({
+    indicatorButton: ({ context }) => ({
         class: [
             // Size
             'w-4 h-4',
@@ -196,19 +198,19 @@ export default {
             'rounded-full transition duration-200',
 
             // Focus Effects
-            'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-primary-400/50 dark:focus:ring-primary-300/50',
+            'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-yellow-400/50',
 
             // Conditional Appearance: Not Highlighted
-            { 'bg-surface-200 hover:bg-surface-300 dark:bg-surface-700 dark:hover:bg-surface-600': !context.highlighted },
+            { 'bg-slate-200 hover:bg-slate-300': !context.highlighted },
 
             // Conditional Appearance: Highlighted
-            { 'bg-primary-500 hover:bg-primary-600': context.highlighted }
+            { 'bg-yellow-500 hover:bg-yellow-600': context.highlighted }
         ]
     }),
     mask: {
         class: ['fixed top-0 left-0 w-full h-full', 'flex items-center justify-center', 'bg-black/90']
     },
-    closebutton: {
+    closeButton: {
         class: [
             // Positioning
             '!absolute top-0 right-0',
@@ -223,16 +225,16 @@ export default {
             'text-white bg-transparent w-12 h-12 rounded-full transition duration-200 ease-in-out',
 
             // Hover Effect
-            'hover:text-white hover:bg-surface-0/10',
+            'hover:text-white hover:bg-white/10',
 
             // Focus Effects
-            'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-primary-400/50 dark:focus:ring-primary-300/50'
+            'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-yellow-400/50'
         ]
     },
-    closeicon: {
+    closeIcon: {
         class: 'w-6 h-6'
     },
-    previousitembutton: ({ parent }) => ({
+    previousItemButton: ({ parent }) => ({
         class: [
             // Display & Flexbox
             'inline-flex justify-center items-center overflow-hidden',
@@ -254,13 +256,13 @@ export default {
             },
 
             // Hover Effect
-            'hover:bg-surface-0/10 hover:text-white',
+            'hover:bg-white/10 hover:text-white',
 
             // Focus Effects
-            'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-primary-400/50 dark:focus:ring-primary-300/50'
+            'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-yellow-400/50'
         ]
     }),
-    nextitembutton: ({ parent }) => ({
+    nextItemButton: ({ parent }) => ({
         class: [
             // Display & Flexbox
             'inline-flex justify-center items-center overflow-hidden',
@@ -282,10 +284,10 @@ export default {
             },
 
             // Hover Effect
-            'hover:bg-surface-0/10 hover:text-white',
+            'hover:bg-white/10 hover:text-white',
 
             // Focus Effects
-            'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-primary-400/50 dark:focus:ring-primary-300/50'
+            'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-yellow-400/50'
         ]
     }),
     caption: {
@@ -303,4 +305,4 @@ export default {
         leaveActiveClass: 'transition-all duration-150 ease-in',
         leaveToClass: 'opacity-0 scale-75'
     }
-};
+} satisfies GalleriaPassThroughOptions;
