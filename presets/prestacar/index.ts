@@ -3,6 +3,7 @@ import button from './button';
 import card from './card';
 import carousel from './carousel';
 import datatable from './datatable';
+import dialog from './dialog';
 import global from './global';
 import ripple from './ripple';
 import tabview from './tabview';
@@ -31,6 +32,7 @@ export default {
     carousel,
     checkbox,
     datatable,
+    dialog,
     dropdown,
     floatlabel,
     image,

@@ -14,8 +14,7 @@ export default {
             'm-0',
 
             // Color
-            'dark:border',
-            'dark:border-surface-700',
+            '',
 
             // Transitions
             'transform',
@@ -48,8 +47,8 @@ export default {
             'rounded-tr-lg',
 
             // Colors
-            'bg-surface-0 dark:bg-surface-800',
-            'text-surface-700 dark:text-surface-0/80'
+            'bg-white',
+            'text-slate-700'
         ]
     },
     title: {
@@ -75,17 +74,17 @@ export default {
             'rounded-full',
 
             // Colors
-            'text-surface-500',
+            'text-slate-500',
             'bg-transparent',
 
             // Transitions
             'transition duration-200 ease-in-out',
 
             // States
-            'hover:text-surface-700 dark:hover:text-white/80',
-            'hover:bg-surface-100 dark:hover:bg-surface-800/80',
+            'hover:text-slate-700',
+            'hover:bg-slate-100',
             'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-inset',
-            'focus:ring-primary-400/50 dark:focus:ring-primary-300/50',
+            'focus:ring-yellow-400/50',
 
             // Misc
             'overflow-hidden'
@@ -108,17 +107,17 @@ export default {
             'rounded-full',
 
             // Colors
-            'text-surface-500',
+            'text-slate-500',
             'bg-transparent',
 
             // Transitions
             'transition duration-200 ease-in-out',
 
             // States
-            'hover:text-surface-700 dark:hover:text-white/80',
-            'hover:bg-surface-100 dark:hover:bg-surface-800/80',
+            'hover:text-slate-700',
+            'hover:bg-slate-100',
             'focus:outline-none focus:outline-offset-0 focus:ring focus:ring-inset',
-            'focus:ring-primary-400/50 dark:focus:ring-primary-300/50',
+            'focus:ring-yellow-400/50',
 
             // Misc
             'overflow-hidden'
@@ -159,8 +158,8 @@ export default {
             },
 
             // Colors
-            'bg-surface-0 dark:bg-surface-800',
-            'text-surface-700 dark:text-surface-0/80',
+            'bg-white',
+            'text-slate-700',
 
             // Misc
             'overflow-y-auto'
@@ -183,8 +182,8 @@ export default {
             'rounded-b-lg',
 
             // Colors
-            'bg-surface-0 dark:bg-surface-800',
-            'text-surface-700 dark:text-surface-0/80'
+            'bg-white',
+            'text-slate-700'
         ]
     },
     mask: ({ props }) => ({

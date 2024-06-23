@@ -13,7 +13,7 @@
         <div class="border-l border-gray-300 h-8 mx-8"></div>
         <!-- Section droite: Liste catégorie et Supprimer catégorie -->
         <div class="flex items-center space-x-4">
-          <Dropdown v-model="selectedCategory" :options="categories" optionLabel="nom" placeholder="Liste catégorie" class="border rounded-md p-2" />
+          <Dropdown v-model="selectedCategories" :options="categories" optionLabel="nom" placeholder="Liste catégorie" class="border rounded-md p-2" multiple />
           <Button @click="deleteCategory" label="Supprimer catégorie" severity="primary" type="submit" />
         </div>
       </div>
@@ -38,7 +38,7 @@
 
         <div class="mb-4">
           <label for="category" class="block text-sm font-semibold">Choisir une catégorie</label>
-          <Dropdown id="category" v-model="selectedCategory" :options="categories" optionLabel="nom" placeholder="Choisir une catégorie" class="border rounded-md p-2 w-full" />
+          <MultiSelect v-model="selectedCategories" :options="categories" optionValue="id" optionLabel="nom" placeholder="Sélectionner des catégories" :maxSelectedLabels="3" class="w-full" />
         </div>
 
         <div class="mb-4">
@@ -48,9 +48,9 @@
             <Column field="prix" header="Prix" />
           </DataTable>
           <div class="flex items-center justify-end mb-4">
-            <button class="cursor-pointer p-2 border w-8 h-8 rounded-full flex items-center hover:bg-gray-200">
-              <Icon name="material-symbols:add" size="24px"  @click="addPrice" />
-          </button>
+            <button class="cursor-pointer p-2 border w-8 h-8 rounded-full flex items-center hover:bg-gray-200" @click="showPriceDialog = true">
+              <Icon name="material-symbols:add" size="24px" />
+            </button>
           </div>
         </div>
 
@@ -61,65 +61,183 @@
             <Column field="prix" header="Prix" />
           </DataTable>
           <div class="flex items-center justify-end mb-4">
-            <button class="cursor-pointer p-2 border w-8 h-8 rounded-full flex items-center hover:bg-gray-200">
-              <Icon name="material-symbols:add" size="24px"  @click="addPrice" />
-          </button>          </div>
+            <button class="cursor-pointer p-2 border w-8 h-8 rounded-full flex items-center hover:bg-gray-200" @click="showOptionDialog = true">
+              <Icon name="material-symbols:add" size="24px" />
+            </button>
+          </div>
         </div>
 
         <Button label="Ajouter" severity="primary" type="submit" class="w-full mt-4" @click="submitForm" />
       </div>
     </div>
+
+    <!-- Dialog for adding prices -->
+    <Dialog header="Ajouter un prix" v-model:visible="showPriceDialog" modal>
+      <div class="p-fluid">
+        <div class="field">
+          <label for="newPriceTemps" class="block">Temps</label>
+          <InputText id="newPriceTemps" v-model="newPrice.temps" />
+        </div>
+        <div class="field">
+          <label for="newPricePrix" class="block">Prix</label>
+          <InputText id="newPricePrix" v-model="newPrice.prix" />
+        </div>
+      </div>
+      <div class="flex justify-end mt-4">
+        <Button label="Ajouter" @click="addPrice" severity="primary" />
+      </div>
+    </Dialog>
+
+    <!-- Dialog for adding options -->
+    <Dialog header="Ajouter une option" v-model:visible="showOptionDialog" modal>
+      <div class="p-fluid">
+        <div class="field">
+          <label for="newOptionOption" class="block">Option</label>
+          <InputText id="newOptionOption" v-model="newOption.option" />
+        </div>
+        <div class="field">
+          <label for="newOptionPrix" class="block">Prix</label>
+          <InputText id="newOptionPrix" v-model="newOption.prix" />
+        </div>
+      </div>
+      <div class="flex justify-end mt-4">
+        <Button label="Ajouter" @click="addOption" severity="primary" />
+      </div>
+    </Dialog>
   </div>
 </template>
 
 <script setup lang="ts">
 
-const categoryName = ref('');
-const selectedCategory = ref(null);
-const categories = ref([
-  { nom: 'SUV', id: 1 },
-  { nom: 'Luxe', id: 2 },
-  // Ajoutez d'autres catégories si nécessaire
-]);
+interface Categorie {
+  id: number;
+  nom: string;
+}
 
+const categoryName = ref('');
+const selectedCategories = ref<number[]>([]);
+const categories = ref<Categorie[]>([]);
 const carName = ref('');
 const imageUrl = ref('');
 const description = ref('');
+const prices = ref<{ temps: string, prix: string }[]>([]);
+const options = ref<{ option: string, prix: string }[]>([]);
+const showPriceDialog = ref(false);
+const showOptionDialog = ref(false);
+const newPrice = ref({ temps: '', prix: '' });
+const newOption = ref({ option: '', prix: '' });
 
-const prices = ref([
-  { temps: '1 heure', prix: '50€' },
-  { temps: '2 heures', prix: '90€' },
-  // Ajoutez d'autres prix si nécessaire
-]);
+const fetchCategories = async () => {
+  try {
+    categories.value = await $fetch<Categorie[]>('/api/category');
+    console.log('Catégories récupérées:', categories.value);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des catégories:', error);
+  }
+};
 
-const options = ref([
-  { option: 'GPS', prix: '10€' },
-  { option: 'Siège enfant', prix: '15€' },
-  // Ajoutez d'autres options si nécessaire
-]);
+onMounted(() => {
+  fetchCategories();
+});
 
 const addPrice = () => {
-  // Ajoutez la logique pour ajouter un nouvel élément dans prices
+  if (newPrice.value.temps && newPrice.value.prix) {
+    prices.value.push({ ...newPrice.value });
+    newPrice.value = { temps: '', prix: '' };
+    showPriceDialog.value = false;
+  }
 };
 
 const addOption = () => {
-  // Ajoutez la logique pour ajouter un nouvel élément dans options
+  if (newOption.value.option && newOption.value.prix) {
+    options.value.push({ ...newOption.value });
+    newOption.value = { option: '', prix: '' };
+    showOptionDialog.value = false;
+  }
 };
 
-const addCategory = () => {
-  console.log('Ajouter catégorie:', categoryName.value);
+const addCategory = async () => {
+  try {
+    const response = await $fetch('/api/admin/category', {
+      method: 'POST',
+      body: { nom: categoryName.value }
+    });
+    if (response.hasOwnProperty('error') && response.error) {
+      console.error('Erreur lors de l\'ajout de la catégorie:', response.error);
+    } else {
+      categories.value.push(response);
+      categoryName.value = '';
+    }
+  } catch (error) {
+    console.error('Erreur lors de l\'ajout de la catégorie:', error);
+  }
 };
 
-const deleteCategory = () => {
-  console.log('Supprimer catégorie:', selectedCategory.value);
+const deleteCategory = async () => {
+  if (selectedCategories.value.length === 0) {
+    return;
+  }
+
+  try {
+    const response = await $fetch(`/api/admin/category/${selectedCategories.value[0]}`, {
+      method: 'DELETE'
+    });
+    if (response.statusCode !== 200) {
+      console.error('Erreur lors de la suppression de la catégorie:', response.message);
+    } else {
+      categories.value = categories.value.filter(category => category.id !== selectedCategories.value[0]);
+      selectedCategories.value = [];
+    }
+  } catch (error) {
+    console.error('Erreur lors de la suppression de la catégorie:', error);
+  }
 };
 
-const submitForm = () => {
-  console.log('Nom de la voiture:', carName.value);
-  console.log('Url image:', imageUrl.value);
-  console.log('Description:', description.value);
-  console.log('Catégorie sélectionnée:', selectedCategory.value);
-  console.log('Prix:', prices.value);
-  console.log('Options:', options.value);
+const submitForm = async () => {
+  // Vérifiez que selectedCategories est un tableau
+  if (!Array.isArray(selectedCategories.value)) {
+    console.error('Les catégories sélectionnées ne sont pas valides.');
+    return;
+  }
+
+  // Vérifiez que tous les champs obligatoires sont remplis
+  if (!carName.value || !imageUrl.value || !description.value || selectedCategories.value.length === 0) {
+    console.error('Tous les champs obligatoires ne sont pas remplis.');
+    return;
+  }
+
+  const carData = {
+    name: carName.value,
+    pictureName: imageUrl.value,
+    description: description.value,
+    idCategorie: selectedCategories.value,
+    options: options.value.map(option => ({
+      name: option.option,
+      price: option.prix
+    })),
+    prices: prices.value.map(price => ({
+      duration: price.temps,
+      price: price.prix
+    }))
+  };
+
+  try {
+    const response = await $fetch('/api/admin/car', {
+      method: 'POST',
+      body: carData,
+    });
+
+    if (response.error) {
+      console.error('Erreur lors de l\'ajout de la voiture:', response.error);
+    } else {
+      console.log('Voiture ajoutée avec succès:', response);
+    }
+  } catch (error) {
+    console.error('Erreur lors de l\'ajout de la voiture:', error);
+  }
 };
 </script>
+
+<style scoped>
+/* Ajoutez ici vos styles personnalisés */
+</style>
