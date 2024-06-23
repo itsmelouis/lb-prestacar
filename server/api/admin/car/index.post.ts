@@ -14,14 +14,14 @@ interface CarBody {
   name: string;
   pictureName: string;
   description: string;
-  idCategory: number[];
+  idCategorie: number[];
   options: OptionsBody[];
   prices: PricesBody[];
 }
 
 export default eventHandler<{ body: CarBody }>(async (event) => {
   await requireAuthSession(event);
-  const { name, pictureName, description, idCategory, options, prices } = await readBody(event);
+  const { name, pictureName, description, idCategorie, options, prices } = await readBody(event);
 
   if (!name || !pictureName || !description || !options.length || !prices.length) {
     throw createError({
@@ -30,23 +30,9 @@ export default eventHandler<{ body: CarBody }>(async (event) => {
     });
   }
 
-  // const category = await prisma.categorie.findUnique({
-  //   where: {
-  //     id: idCategory,
-  //   },
-  // });
-
-  // if (!category) {
-  //   throw createError({
-  //     message: "La catégorie n'existe pas.",
-  //     statusCode: 400,
-  //   });
-  // }
-
-  const categoriesData = idCategory.map(id => ({
+  const categoriesData = idCategorie.map(id => ({
     categorieId: id,
   }));
-
 
   const voiture = await prisma.voiture.create({
     data: {
