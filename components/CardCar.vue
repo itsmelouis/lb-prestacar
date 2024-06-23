@@ -20,8 +20,9 @@ const props = defineProps<CardCarProps>()
     </div>
     <NuxtLink :to="`/vehicules/${props.id}`">
       <div class="w-80 h-80 overflow-hidden rounded-xl">
-        <img :alt="`${props.title}`"
-          class="object-cover transition-transform duration-300 hover:scale-105 w-full h-full" :src="props.image" />
+        <CldImage class="object-cover transition-transform duration-300 hover:scale-105" :src="`${props.image}/1`" width="987" height="987" alt="My Awesome Image" />
+        <!-- <img :alt="`${props.title}`"
+          class="object-cover transition-transform duration-300 hover:scale-105 w-full h-full" :src="props.image" /> -->
       </div>
     </NuxtLink>
     <div class="flex flex-col justify-center items-center my-2">

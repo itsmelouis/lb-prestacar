@@ -3,7 +3,7 @@
     <img alt="Luxury vehicle" class="w-full h-auto" height="500" src="/hero_limo.png" width="768" />
     <div
       class="absolute left-10 bottom-10 bg-black bg-opacity-35 flex flex-col justify-center items-start p-8 max-w-fit max-h-fit rounded-lg">
-      <h2 class="text-3xl font-bold text-white">PRESTACAR, <br> le meilleur de la location de véhicules de luxe.</h2>
+      <h2 class="text-3xl font-bold text-white">PRESTACAR, <br> le meilleur de la location de voitures de luxe.</h2>
       <ul class="text-white mt-4 space-y-2">
         <li>• Véhicules haut de gamme</li>
         <li>• Des prix justes</li>
@@ -22,9 +22,9 @@
   <section class="flex flex-col justify-center items-center my-10">
     <h3 class="font-semibold text-2xl text-center mb-4">Nos top véhicules</h3>
     <div class="flex flex-row gap-8 flex-wrap">
-      <CardCar title="brandon" id="1" image="https://lb-prestacar.com/assets/cox3-e064cf11.jpg" />
-      <CardCar title="brandon" id="2" image="https://lb-prestacar.com/assets/cox3-e064cf11.jpg" />
-      <CardCar title="brandon" id="3" image="https://lb-prestacar.com/assets/cox3-e064cf11.jpg" />
+      <CardCar title="brandon" id="1" image="aston_martin_volante" />
+      <CardCar title="brandon" id="2" image="aston_martin_volante" />
+      <CardCar title="brandon" id="3" image="aston_martin_volante" />
 
     </div>
     <NuxtLink to="/vehicules" class="mt-10">
@@ -64,17 +64,17 @@
     <Carousel :value="products" :numVisible="3" :numScroll="3" :responsiveOptions="responsiveOptions">
       <template #item="slotProps">
         <div class="mx-2">
-          <img :src="slotProps.data.image" :alt="slotProps.data.name">
+          <CldImage src="aston_martin_volante/1" width="987" height="987" alt="My Awesome Image" />
           <p class="text-center font-semibold">{{ slotProps.data.name }}</p>
         </div>
       </template>
     </Carousel>
   </section>
-  <section class="relative flex justify-center items-center flex-col py-12">
+  <section class="relative mx-52 py-12">
     <h3 class="font-semibold text-2xl text-center mb-4">FAQ :</h3>
-    <Accordion :activeIndex="0" class="w-full lg:w-auto">
+    <Accordion :activeIndex="0">
       <AccordionTab v-for="tab in tabs" :key="tab.title" :header="tab.title">
-        <p class="m-0">{{ tab.content }}</p>
+        <p>{{ tab.content }}</p>
       </AccordionTab>
     </Accordion>
   </section>
@@ -82,7 +82,6 @@
 
 
 <script setup lang="ts">
-
 const products = ref([
   { image: 'hero_limo.png', name: 'Mariage' },
   { image: 'hero_limo.png', name: 'Anniversaire' },

@@ -18,6 +18,7 @@ import floatlabel from './floatlabel';
 import calendar from './calendar';
 import textarea from './textarea';
 import checkbox from './checkbox';
+import galleria from './galleria';
 
 export default {
     global,
@@ -35,6 +36,7 @@ export default {
     dialog,
     dropdown,
     floatlabel,
+    galleria,
     image,
     inputtext,
     multiselect,

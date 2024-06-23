@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col lg:flex-row min-h-screen">
     <!-- Section Image à gauche -->
-    <div class="hidden lg:block lg:w-1/2 aspect-square rounded-xl overflow-hidden">
-      <img src="/hero_cadillac.jpeg" style="aspect-ratio: 400/400; object-fit: cover;" alt="Image d'une jolie Cadillac Escalade" class="h-full object-cover">
+    <div class="hidden lg:block lg:w-1/2 rounded-xl">
+      <CldImage src="aston_martin_volante/1" width="987" height="987" alt="My Awesome Image" />
     </div>
     <!-- Section Formulaire à droite -->
     <div class="flex-1 flex items-center justify-center p-4">
@@ -124,7 +124,7 @@ const suggestions = ref<string[]>([]);
 watchEffect(() => {
 
 })
-;
+  ;
 // Fonction pour rechercher les suggestions d'email
 const search = (event: any) => {
   const query = event.query;
