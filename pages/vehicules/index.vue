@@ -27,7 +27,7 @@
 
   <section class="relative mx-52 py-12">
     <h3 class="font-semibold text-2xl text-center mb-4">FAQ :</h3>
-    <Accordion :activeIndex="0">
+    <Accordion>
       <AccordionTab v-for="tab in tabs" :key="tab.title" :header="tab.title">
         <p>{{ tab.content }}</p>
       </AccordionTab>
@@ -107,24 +107,44 @@ const filteredCars = computed(() => {
 
 const tabs = ref([
   {
-    title: 'Question 1',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+    title: 'Quels types de voitures proposez-vous à la location ?',
+    content: 'Nous proposons une large gamme de véhicules à la location, allant des voitures de luxe aux voitures pour particuliers, ainsi que des voitures spécialement conçues pour les mariages. Notre flotte comprend des marques prestigieuses telles que Mercedes, BMW, Audi, et bien d\'autres.'
   },
   {
-    title: 'Question 2',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+    title: 'Comment puis-je réserver une voiture chez Prestacar ?',
+    content: 'Vous pouvez réserver une voiture directement sur notre site internet en utilisant notre formulaire de réservation en ligne. Vous pouvez également nous contacter par téléphone ou par email pour effectuer une réservation.'
   },
   {
-    title: 'Question 3',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+    title: 'Quels sont les documents nécessaires pour louer une voiture ?',
+    content: 'Pour louer une voiture, vous aurez besoin d\'une pièce d\'identité valide (passeport ou carte d\'identité), d\'un permis de conduire en cours de validité, et d\'une carte de crédit au nom du conducteur principal.'
   },
   {
-    title: 'Question 4',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
+    title: 'Proposez-vous des services de location de voiture avec chauffeur ?',
+    content: 'Oui, nous proposons des services de location de voiture avec chauffeur pour ceux qui souhaitent un service haut de gamme et personnalisé. Ce service est disponible pour nos voitures de luxe ainsi que pour les événements spéciaux comme les mariages.'
   },
   {
-    title: 'Question 5',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.'
-  }
+    title: 'Quels sont vos tarifs de location ?',
+    content: 'Nos tarifs varient en fonction du type de véhicule, de la durée de la location et des services supplémentaires choisis. Vous pouvez consulter nos tarifs détaillés sur notre site internet ou nous contacter directement pour obtenir un devis personnalisé.'
+  },
+  {
+    title: 'Est-il possible de louer une voiture pour une longue durée ?',
+    content: 'Oui, nous offrons des options de location à court et à long terme. Pour les locations de longue durée, nous proposons des tarifs préférentiels et des conditions flexibles. Contactez-nous pour discuter de vos besoins spécifiques.'
+  },
+  {
+    title: 'Proposez-vous des voitures pour les mariages ?',
+    content: 'Absolument ! Nous avons une sélection de voitures de luxe parfaites pour les mariages. Nous pouvons également organiser des services supplémentaires tels que la décoration du véhicule et un chauffeur pour le jour J.'
+  },
+  {
+    title: 'Puis-je modifier ou annuler ma réservation ?',
+    content: 'Oui, vous pouvez modifier ou annuler votre réservation. Les conditions de modification et d\'annulation varient en fonction de la politique de l\'entreprise et de la période de préavis. Veuillez consulter nos conditions générales de location pour plus de détails.'
+  },
+  {
+    title: 'Y a-t-il une limite de kilométrage pour les voitures louées ?',
+    content: 'Nos locations incluent généralement un kilométrage limité. Toutefois, nous proposons des options de kilométrage illimité pour certaines catégories de véhicules moyennant un supplément. Veuillez vérifier les détails spécifiques lors de la réservation.'
+  },
+  {
+    title: 'Quels sont vos tarifs de location ?',
+    content: 'Nos tarifs varient en fonction du type de véhicule, de la durée de la location et des services supplémentaires choisis. Vous pouvez consulter nos tarifs détaillés sur notre site internet ou nous contacter directement pour obtenir un devis personnalisé.'
+  },
 ]);
 </script>
