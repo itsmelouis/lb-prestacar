@@ -1,4 +1,26 @@
 <script setup lang="ts">
+
+
+const nuxtApp = useNuxtApp();
+const isAuthenticated = computed(() => !!nuxtApp.$auth.loggedIn.value);
+const router = useRouter();
+
+const handleLogout = async () => {
+  try {
+    const response = await $fetch('/api/auth/logout', {
+      method: 'POST',
+    });
+
+    if (response.message === "Déconnecté avec succès!") {
+      await nuxtApp.$auth.updateSession();
+      navigateTo('/login');
+    } else {
+      console.error('Erreur lors de la déconnexion:', response.message);
+    }
+  } catch (error) {
+    console.error('Erreur lors de la déconnexion:', error);
+  }
+};
 </script>
 
 <template>
@@ -29,11 +51,9 @@
           </RouterLink>
         </nav>
         <Button label="Devis personnalisé" severity="primary"></Button>
-        <!-- <div class="md:hidden">
-          <button class="text-gray-100 hover:text-gray-400 focus:outline-none focus:text-gray-400">
-            <Icon name="cil:hamburger-menu" color="black" />
-          </button>
-        </div> -->
+        <div v-if="isAuthenticated" class="ml-4">
+          <Button label="Déconnexion" severity="danger" @click="handleLogout"></Button>
+        </div>
       </div>
     </div>
   </header>
@@ -43,8 +63,4 @@
 .router-link-active span {
   @apply font-extrabold;
 }
-
-/* .router-link-active:hover {
-  @apply bg-green-200 font-medium;
-} */
 </style>
