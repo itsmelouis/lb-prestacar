@@ -36,24 +36,20 @@
 </template>
 
 <script setup lang="ts">
-
-
 const email = ref('');
 const password = ref('');
 
 const errorMessage = ref('');
 const loading = ref(false);
 
-// Utilisation du routeur Vue pour la redirection
 const router = useRouter();
+const nuxtApp = useNuxtApp();
 
 const handleSubmit = async () => {
-  // Réinitialiser les messages d'erreur et l'état de chargement
   errorMessage.value = '';
   loading.value = true;
 
   try {
-    // Envoyer les données de connexion à l'API backend
     const response = await fetch('/api/auth/login', {
       method: 'POST',
       headers: {
@@ -65,9 +61,11 @@ const handleSubmit = async () => {
     const result = await response.json();
 
     if (response.ok) {
-      // Si la connexion réussit, stocker la session et rediriger
-      await useFetch<AuthSession>('/api/auth/session', { method: 'GET' });
-      navigateTo('/admin');
+      // Redirigé vers la page d'administration
+      await nuxtApp.$auth.updateSession();
+      setTimeout(() => {
+        navigateTo('/admin');
+      }, 500);
     } else {
       errorMessage.value = result.message || 'Erreur de connexion';
     }
