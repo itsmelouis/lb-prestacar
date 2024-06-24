@@ -40,14 +40,12 @@
         </div>
         <div class="space-y-4">
           <div class="space-y-2">
-            <h2 class="text-xl font-bold tracking-tighter sm:text-2xl md:text-3xl">The Future of Jamstack</h2>
+            <h2 class="text-xl font-bold tracking-tighter sm:text-2xl md:text-3xl">Qui sommes nous?</h2>
           </div>
           <div class="space-y-4">
             <p
-              class="text-lg leading-loose text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              The Jamstack has taken the web by storm. It's the modern way to build fast, secure, and scalable sites
-              and apps. But what does the future hold for the Jamstack? In this article, we'll take a look at some of
-              the emerging trends and technologies that are shaping the future of the Jamstack.
+              class="text-lg leading-loose md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relax">
+Prestacar vous propose de la location de voitures pour différents évènements, mariage, nouvel an, anniversaire, EVJF, etc… Un grand nombre de voitures qui vous permet de faire votre choix en fonction de vos goûts et votre budget. Nos voitures sont louées avec chauffeurs d’assurer un moment en toute sécurité et sans se soucier de “qui va conduire” ! Une location de voiture de luxe pour tous les amoureux du monde automobile !
             </p>
             <div class="flex gap-2">
               <NuxtLink to="/vehicules">
