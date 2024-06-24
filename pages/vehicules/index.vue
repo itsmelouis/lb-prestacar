@@ -1,12 +1,12 @@
 <template>
   <section class="mt-32 flex justify-center">
     <div class="w-full max-w-7xl flex flex-col items-center">
-      <div class="w-full max-w-lg mb-6 flex gap-4">
+      <div class="mb-6 flex justify-center items-center gap-4">
         <span class="relative flex-1">
           <Icon name="material-symbols:search-rounded" size="24px" class="z-50 absolute top-1/2 transform -translate-y-1/2 right-3" />
           <InputText v-model="search" placeholder="Rechercher un véhicule" class="w-full" />
         </span>
-        <MultiSelect v-model="selectedCategories" :options="categories" optionValue="id" optionLabel="nom" placeholder="Sélectionner des catégories" :maxSelectedLabels="3" class="w-full md:w-20" />
+        <MultiSelect v-model="selectedCategories" :options="categories" optionValue="id" optionLabel="nom" placeholder="Sélectionner des catégories" :maxSelectedLabels="3" class="" />
       </div>
       <section class="w-full flex flex-col items-center my-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-3 gap-y-10">
