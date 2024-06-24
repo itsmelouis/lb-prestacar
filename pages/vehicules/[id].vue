@@ -19,7 +19,7 @@
     <section class="mt-16 px-8">
       <TabView v-model:activeIndex="activeTabIndex">
         <TabPanel header="Détails du véhicule">
-          <div class="w-full">
+          <div class="w-full flex justify-center">
             <!-- <Carousel :value="cars?.cloudinaryAssets" :numVisible="3" :numScroll="3" :responsiveOptions="responsiveOptions"
               :pt="{ item: { class: ['flex shrink-0 grow w-full'] } }">
               <template #item="slotProps">
@@ -34,7 +34,11 @@
             <Galleria :value="cars?.cloudinaryAssets" :numVisible="5" containerStyle="max-width: 640px" :showThumbnails="false"
               :showIndicators="true">
               <template #item="slotProps">
-                <Image :src="getCldUrl(slotProps.item)" style="width: 100%; display: block" preview />
+                <Image :src="getCldUrl(slotProps.item)" style="width: 100%; display: block" preview >
+                  <template #indicatoricon>
+                    <Icon name="material-symbols:search" size="24" class="text-white" />
+                  </template>
+                </Image>
                 <!-- <img :src="slotProps.item.itemImageSrc" :alt="slotProps.item.alt" style="width: 100%; display: block" /> -->
               </template>
             </Galleria>
@@ -43,8 +47,20 @@
           {{ cars?.description }}
         </TabPanel>
         <TabPanel header="Tarifs">
-          <p>salut</p>
+          <pre>{{ cars?.GrilleTarifiaire }}</pre>
+          <h2 class="font-semibold text-xl">Grille tariffiare</h2>
+          <DataTable :value="cars?.GrilleTarifiaire" class="w-full">
+            <Column field="temps" header="Temps" />
+            <Column field="prix" header="Prix" />
+          </DataTable>
+          <pre>{{ cars?.Option }}</pre>
+          <h2 class="font-semibold text-xl">Options</h2>
+          <DataTable :value="cars?.Option" class="w-full">
+            <Column field="intitule" header="Options" />
+            <Column field="prix" header="Prix" />
+          </DataTable>
         </TabPanel>
+
       </TabView>
     </section>
 
@@ -66,11 +82,13 @@
 </template>
 
 <script setup lang="ts">
-import type { Voiture, Avis } from '@prisma/client'
+import type { Voiture, Avis, GrilleTarifiaire, Option} from '@prisma/client'
 import Image from 'primevue/image';
 
 interface VoitureWithAssets extends Voiture {
   cloudinaryAssets: string[];
+  GrilleTarifiaire: GrilleTarifiaire[];
+  Option: Option[];
 }
 
 const route = useRoute()
@@ -80,29 +98,6 @@ const reviews = ref<Avis[] | null>(null)
 const error = ref<string | null>(null)
 
 const activeTabIndex = ref(0);
-
-const responsiveOptions = ref([
-  {
-    breakpoint: '1400px',
-    numVisible: 1,
-    numScroll: 1
-  },
-  {
-    breakpoint: '1199px',
-    numVisible: 1,
-    numScroll: 1
-  },
-  {
-    breakpoint: '767px',
-    numVisible: 1,
-    numScroll: 1
-  },
-  {
-    breakpoint: '575px',
-    numVisible: 1,
-    numScroll: 1
-  }
-]);
 
 useFetch<VoitureWithAssets>(`/api/car/${route.params.id}`)
   .then((response) => {

@@ -37,7 +37,7 @@
         </div>
 
         <div class="mb-4">
-          <label for="category" class="block text-sm font-semibold">Choisir une catégorie</label>
+          <label for="category" class="block text-sm font-semibold">Choisir une ou plusieurs catégories</label>
           <MultiSelect v-model="selectedCategories" :options="categories" optionValue="id" optionLabel="nom" placeholder="Sélectionner des catégories" :maxSelectedLabels="3" class="w-full" />
         </div>
 

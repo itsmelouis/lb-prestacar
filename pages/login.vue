@@ -67,7 +67,7 @@ const handleSubmit = async () => {
     if (response.ok) {
       // Si la connexion réussit, stocker la session et rediriger
       await useFetch<AuthSession>('/api/auth/session', { method: 'GET' });
-      router.push('/admin/admin');
+      navigateTo('/admin');
     } else {
       errorMessage.value = result.message || 'Erreur de connexion';
     }
