@@ -12,13 +12,15 @@ interface ContactBody {
   isCondition: boolean;
   isRgpd: boolean;
   serviceDate: Date;
+  vehicle: string
 }
 
 export default eventHandler<{ body: ContactBody }>(async (event) => {
-  const { firstName, name, email, phone, message, isCondition, isRgpd, serviceDate } = await readBody(event);
-
+  const { firstName, name, email, phone, message, isCondition, isRgpd, serviceDate, vehicle } = await readBody(event);
+console.log(await readBody(event));
   // Vérification des champs obligatoires
   if (!firstName) {
+    console.log('prénom pas là', firstName);
     throw createError({
       message: "Le prénom est obligatoire.",
       statusCode: 400,
@@ -26,6 +28,7 @@ export default eventHandler<{ body: ContactBody }>(async (event) => {
   }
 
   if (!name) {
+    console.log('nom pas là', name);
     throw createError({
       message: "Le nom est obligatoire.",
       statusCode: 400,
@@ -33,6 +36,7 @@ export default eventHandler<{ body: ContactBody }>(async (event) => {
   }
 
   if (!message || message.length < 50) {
+    console.log('message pas là', message);
     throw createError({
       message: "Le message est obligatoire et doit dépasser 50 caractères.",
       statusCode: 400,
@@ -40,6 +44,7 @@ export default eventHandler<{ body: ContactBody }>(async (event) => {
   }
 
   if (!isCondition) {
+    console.log('condition pas là', isCondition);
     throw createError({
       message: "Vous devez accepter les conditions d'utilisation générales de Prestacar.",
       statusCode: 400,
@@ -48,24 +53,18 @@ export default eventHandler<{ body: ContactBody }>(async (event) => {
 
   // Vérifications de validité
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-  const phoneRegex = /^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/;
 
   if (email && !emailRegex.test(email)) {
+    console.log('email pas valide', email);
     throw createError({
       message: "L'email est invalide.",
       statusCode: 400,
     });
   }
 
-  if (phone && !phoneRegex.test(phone)) {
-    throw createError({
-      message: "Le numéro de téléphone est invalide.",
-      statusCode: 400,
-    });
-  }
-
   // Vérification que l'email ou le téléphone soit renseigné
   if (!email) {
+    console.log('email pas là', email);
     throw createError({
       message: "L'email est obligatoire.",
       statusCode: 400,
@@ -98,12 +97,13 @@ export default eventHandler<{ body: ContactBody }>(async (event) => {
         estCondition: isCondition,
         estRgpd: isRgpd,
         date_presation: serviceDate,
+        vehicule: vehicle,
       },
     });
 
     return {
       statusCode: 200,
-      message: "Avis enregistré avec succès",
+      message: "Demande de devis enregistré avec succès !",
     };
   } catch (error) {
     throw createError({

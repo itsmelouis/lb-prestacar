@@ -19,6 +19,7 @@ import calendar from './calendar';
 import textarea from './textarea';
 import checkbox from './checkbox';
 import galleria from './galleria';
+import toast from './toast';
 
 export default {
     global,
@@ -44,4 +45,5 @@ export default {
     tabview,
     tag,
     textarea,
+    toast,
 }

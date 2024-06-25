@@ -72,6 +72,7 @@ model Contact {
   telephone       String?
   email           String?
   type_prestation String
+  vehicule        String
   date_presation  DateTime
   message         String
   estCondition    Boolean?

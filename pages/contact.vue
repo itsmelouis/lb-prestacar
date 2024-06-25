@@ -1,4 +1,5 @@
 <template>
+  <Toast position="top-right" />
   <div class="flex flex-col lg:flex-row min-h-screen">
     <!-- Section Image à gauche -->
     <div class="hidden lg:block lg:w-1/2 rounded-xl">
@@ -10,54 +11,49 @@
         <div class="flex justify-center mb-4">
           <img src="/logo-white.svg" alt="Petite image" class="w-24 h-24 object-contain">
         </div>
-        <form>
+        <form @submit.prevent="handleSubmit">
           <!-- Row 1: Nom et Prénom -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
             <div>
               <label for="lastName" class="text-sm text-gray-700">Nom</label>
-              <InputText id="lastName" />
+              <InputText id="lastName" v-model="form.name" class="w-full" />
             </div>
             <div>
               <label for="firstName" class="text-sm text-gray-700">Prénom</label>
-              <InputText id="firstName" />
+              <InputText id="firstName" v-model="form.firstName" class="w-full" />
             </div>
           </div>
           <!-- Row 2: Téléphone et Adresse Mail -->
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
             <div>
               <label for="phone" class="text-sm text-gray-700">Téléphone</label>
-              <InputText id="phone" type="tel" />
+              <InputText id="phone" type="tel" v-model="form.phone" class="w-full" />
             </div>
             <div>
-              <label for="mail" class="text-sm text-gray-700">Adresse mail</label>
-              <AutoComplete v-model="value" :suggestions="suggestions" @complete="search" />
+              <label for="email" class="text-sm text-gray-700">Adresse mail</label>
+              <AutoComplete id="email" v-model="form.email" :suggestions="suggestions" @complete="search" class="w-full" />
             </div>
           </div>
           <!-- Véhicule -->
           <div class="mb-4">
             <label for="vehicle" class="text-sm text-gray-700">Véhicule</label>
-            <Dropdown id="vehicle" editable :options="cars" optionLabel="nom" class="w-full" />
+            <Dropdown id="vehicle" v-model="form.vehicle" editable :options="cars" optionLabel="nom" optionValue="nom" class="w-full" />
           </div>
           <!-- Date de la prestation -->
           <div class="mb-4">
-            <label for="date" class="block text-sm font-medium text-gray-700">Date de la prestation</label>
-            <Calendar v-model="date" />
-          </div>
-          <!-- Type de prestation -->
-          <div class="mb-4">
-            <label for="service_type" class="block text-sm font-medium text-gray-700">Type de prestation</label>
-            <Dropdown id="service_type" editable :options="typeServices" optionLabel="label" class="w-full" />
+            <label for="serviceDate" class="block text-sm font-medium text-gray-700">Date de la prestation</label>
+            <Calendar id="serviceDate" v-model="form.serviceDate" class="w-full" />
           </div>
           <!-- Message -->
           <div class="mb-4">
             <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-            <Textarea id="message" class="w-full" rows="4" />
+            <Textarea id="message" v-model="form.message" class="w-full" rows="4" />
           </div>
           <!-- Checkbox: J'accepte les conditions -->
           <div class="mb-4">
             <div class="flex items-start">
               <div class="flex items-center h-5">
-                <Checkbox v-model="isCondition" id="terms" :binary="true" />
+                <Checkbox v-model="form.isCondition" id="terms" :binary="true" />
               </div>
               <div class="ml-3 text-sm">
                 <label for="terms" class="font-medium text-gray-700">J'accepte les conditions</label>
@@ -68,7 +64,7 @@
           <div class="mb-4">
             <div class="flex items-start">
               <div class="flex items-center h-5">
-                <Checkbox v-model="isRgpd" id="rgpd" :binary="true" />
+                <Checkbox v-model="form.isRgpd" id="rgpd" :binary="true" />
               </div>
               <div class="ml-3 text-sm">
                 <label for="rgpd" class="font-medium text-gray-700">J'accepte le RGPD</label>
@@ -77,8 +73,7 @@
           </div>
           <!-- Submit Button -->
           <div class="flex justify-end">
-            <Button label="Envoyer" severity="primary" />
-
+            <Button label="Envoyer" severity="primary" type="submit" />
           </div>
         </form>
       </div>
@@ -87,7 +82,21 @@
 </template>
 
 <script setup lang="ts">
-import type { Voiture } from '@prisma/client'
+import { useToast } from 'primevue/usetoast';
+import type { Voiture } from '@prisma/client';
+import { ref } from 'vue';
+
+const form = ref({
+  name: '',
+  firstName: '',
+  phone: '',
+  email: '',
+  vehicle: '',
+  serviceDate: null,
+  message: '',
+  isCondition: false,
+  isRgpd: false,
+});
 
 const typeServices = [
   { value: 'mariage', label: 'Mariage' },
@@ -99,43 +108,61 @@ const typeServices = [
 
 const cars = ref<Voiture[]>([]);
 const error = ref<string | null>(null);
-const date = ref<Date | null>(null);
+const suggestions = ref<string[]>([]);
+const emailDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com"];
+const toast = useToast();
 
-useFetch<Voiture[]>(`/api/car`)
+const showSuccess = () => {
+};
+
+useFetch<Voiture[]>('/api/car')
   .then((response) => {
     if (response.data.value) {
-      cars.value = response.data.value
+      cars.value = response.data.value;
     } else {
-      error.value = 'Aucune donnée disponible'
+      error.value = 'Aucune donnée disponible';
     }
   })
   .catch((err) => {
-    error.value = err.message || 'Erreur lors du chargement des données'
-  })
+    error.value = err.message || 'Erreur lors du chargement des données';
+  });
 
-const emailDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com"];
-
-const value = ref("");
-const isCondition = ref(false);
-const isRgpd = ref(false);
-const typePrestation = ref("");
-const suggestions = ref<string[]>([]);
-
-watchEffect(() => {
-
-})
-  ;
-// Fonction pour rechercher les suggestions d'email
 const search = (event: any) => {
   const query = event.query;
-  if (query.includes("@")) {
-    const [localPart, domainPart] = query.split("@");
+  if (query.includes('@')) {
+    const [localPart, domainPart] = query.split('@');
     suggestions.value = emailDomains
-      .filter((domain) => domain.startsWith(domainPart))
-      .map((domain) => `${localPart}@${domain}`);
+      .filter(domain => domain.startsWith(domainPart))
+      .map(domain => `${localPart}@${domain}`);
   } else {
-    suggestions.value = emailDomains.map((domain) => `${query}@${domain}`);
+    suggestions.value = emailDomains.map(domain => `${query}@${domain}`);
   }
 };
 
+const handleSubmit = async () => {
+  try {
+    const response = await $fetch('/api/contact', {
+      method: 'POST',
+      body: JSON.stringify(form.value),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    form.value = {
+        name: '',
+        firstName: '',
+        phone: '',
+        email: '',
+        vehicle: '',
+        serviceDate: null,
+        message: '',
+        isCondition: false,
+        isRgpd: false,
+      };
+    toast.add({ severity: 'success', summary: 'Devis créé !', detail: response.message, life: 3000 });
+    console.log('Formulaire soumis avec succès:', response);
+  } catch (error: any) {
+    console.error('Erreur lors de la soumission du formulaire:', error.value);
+  }
+};
 </script>
