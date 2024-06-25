@@ -1,6 +1,5 @@
 <script setup lang="ts">
 
-
 const nuxtApp = useNuxtApp();
 const isAuthenticated = computed(() => !!nuxtApp.$auth.loggedIn.value);
 const router = useRouter();
@@ -25,11 +24,14 @@ const handleLogout = async () => {
 
 <template>
   <header class="bg-white sticky w-full z-20 top-0 start-0 shadow-[rgba(0,0,0,0.24)_0px_3px_8px] py-4">
-    <div class="container mx-auto md:flex md:justify-between md:items-center">
+    <div class="container md:mx-auto flex justify-between items-center">
       <NuxtLink to="/">
         <img src="/logo-white.svg" alt="Logo prestacar" width="150" />
       </NuxtLink>
-      <div class="flex flex-row gap-6 items-center">
+      <div class="md:hidden">
+        <MobileNav />
+      </div>
+      <div class="hidden md:flex flex-row gap-6 items-center">
         <nav class="flex flex-row items-center font-semibold gap-6">
           <RouterLink to="/vehicules" class="group relative flex items-center justify-center self-stretch">
             <span>Véhicules</span>
@@ -50,7 +52,9 @@ const handleLogout = async () => {
             </div>
           </RouterLink>
         </nav>
-        <Button label="Devis personnalisé" severity="primary"></Button>
+        <RouterLink to="/contact">
+          <Button label="Devis personnalisé" severity="primary" />
+        </RouterLink>
         <div v-if="isAuthenticated" class="ml-4">
           <Button label="Déconnexion" severity="danger" @click="handleLogout"></Button>
         </div>
