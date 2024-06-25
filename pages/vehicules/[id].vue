@@ -44,18 +44,18 @@
             </Galleria>
             <!-- <CldImage :src="slotProps.data" width="1200" height="800" alt="My Awesome Image" /> -->
           </div>
-          {{ cars?.description }}
+          <div v-html="cars?.description"></div>
         </TabPanel>
         <TabPanel header="Tarifs">
           <pre>{{ cars?.GrilleTarifiaire }}</pre>
-          <h2 class="font-semibold text-xl">Grille tariffiare</h2>
-          <DataTable :value="cars?.GrilleTarifiaire" class="w-full">
+          <h2 class="font-semibold text-xl">Grille tarifiaire</h2>
+          <DataTable :value="tarifs" class="w-full">
             <Column field="temps" header="Temps" />
             <Column field="prix" header="Prix" />
           </DataTable>
           <pre>{{ cars?.Option }}</pre>
           <h2 class="font-semibold text-xl">Options</h2>
-          <DataTable :value="cars?.Option" class="w-full">
+          <DataTable :value="options" class="w-full">
             <Column field="intitule" header="Options" />
             <Column field="prix" header="Prix" />
           </DataTable>
@@ -93,6 +93,8 @@ interface VoitureWithAssets extends Voiture {
 
 const route = useRoute()
 const cars = ref<VoitureWithAssets | null>(null)
+const tarifs = ref<GrilleTarifiaire[] | null>(null)
+const options = ref<Option[] | null>(null)
 const reviews = ref<Avis[] | null>(null)
 
 const error = ref<string | null>(null)
@@ -103,6 +105,8 @@ useFetch<VoitureWithAssets>(`/api/car/${route.params.id}`)
   .then((response) => {
     if (response.data.value) {
       cars.value = response.data.value
+      tarifs.value = response.data.value.GrilleTarifiaire
+      options.value = response.data.value.Option
       console.log(cars.value)
     } else {
       error.value = 'Aucune donnée disponible'
