@@ -2,7 +2,7 @@
   <div>
     <section class="relative">
       <CldImage v-if="carData?.cloudinaryAssets?.length" class="w-full h-auto" :src="carData.cloudinaryAssets[0]"
-        width="2000" height="700" alt="My Awesome Image" />
+        width="2000" height="700" :alt="`Photo montrant une ${carData.nom}`" />
       <div
         class="absolute left-10 bottom-10 flex flex-col justify-center items-start p-8 max-w-fit max-h-fit rounded-lg">
         <h2 class="text-3xl font-bold text-white">{{ carData?.nom }}</h2>
@@ -34,15 +34,15 @@
             <div v-html="carData?.description"></div>
           </TabPanel>
           <TabPanel header="Tarifs">
-            <h2 class="font-semibold text-xl">Grille tarifaire</h2>
-            <DataTable v-if="carData?.GrilleTarifiaire" :value="carData.GrilleTarifiaire" class="w-full">
+            <h2 v-if="carData?.GrillesTarifiaires" class="font-semibold text-xl">Grilles tarifaires</h2>
+            <DataTable v-if="carData?.GrillesTarifiaires" :value="carData.GrillesTarifiaires" class="w-full">
               <Column field="temps" header="Temps" />
-              <Column field="prix" header="Prix" />
+              <Column field="prix" header="Prix (en euros)" />
             </DataTable>
-            <h2 class="font-semibold text-xl">Options</h2>
-            <DataTable v-if="carData?.Option" :value="carData.Option" class="w-full">
+            <h2 v-if="carData?.Options" class="font-semibold text-xl mt-5">Options</h2>
+            <DataTable v-if="carData?.Options" :value="carData.Options" class="w-full">
               <Column field="intitule" header="Options" />
-              <Column field="prix" header="Prix" />
+              <Column field="prix" header="Prix (en euros)" />
             </DataTable>
           </TabPanel>
         </TabView>
@@ -71,8 +71,8 @@ import type { Voiture, Avis, GrilleTarifiaire, Option } from '@prisma/client';
 
 interface VoitureWithAssets extends Voiture {
   cloudinaryAssets: string[];
-  GrilleTarifiaire: GrilleTarifiaire[];
-  Option: Option[];
+  GrillesTarifiaires: GrilleTarifiaire[];
+  Options: Option[];
 }
 
 const route = useRoute();
@@ -99,12 +99,6 @@ const getCldUrl = (publicId: string) => {
 const getRating = () => {
   return Math.floor(Math.random() * (5 - 3.5 + 1)) + 3.5;
 };
-
-watchEffect(() => {
-  if (carData) {
-    console.log(carData);
-  }
-});
 </script>
 
 <style>

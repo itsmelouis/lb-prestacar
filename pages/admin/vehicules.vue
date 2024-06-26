@@ -26,7 +26,7 @@
             <InputText id="carName" v-model="carName" class="border rounded-md p-2 w-full" />
           </div>
           <div>
-            <label for="imageUrl" class="block text-sm font-semibold">Url image</label>
+            <label for="imageUrl" class="block text-sm font-semibold">Nom du dossier image</label>
             <InputText id="imageUrl" v-model="imageUrl" class="border rounded-md p-2 w-full" />
           </div>
         </div>

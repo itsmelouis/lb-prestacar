@@ -16,7 +16,7 @@ const props = defineProps<CardCarProps>()
 <template>
   <div class="relative max-w-fit">
     <div class="absolute top-2 right-2 z-10">
-      <Tag class="inline-block" :value="`à partir de ${props.price ?? '200'}€`" />
+      <Tag class="inline-block" :value="`à partir de ${props.price ?? '200'}`" />
     </div>
     <NuxtLink :to="`/vehicules/${props.id}`">
       <div class="w-80 h-80 overflow-hidden rounded-xl">

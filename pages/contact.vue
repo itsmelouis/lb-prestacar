@@ -44,6 +44,11 @@
             <label for="serviceDate" class="block text-sm font-medium text-gray-700">Date de la prestation</label>
             <Calendar id="serviceDate" v-model="form.serviceDate" class="w-full" />
           </div>
+          <!-- Type de la prestation -->
+          <div class="mb-4">
+            <label for="serviceDate" class="block text-sm font-medium text-gray-700">Type de la prestation</label>
+            <Dropdown id="vehicle" v-model="form.typePrestation" editable :options="typeServices" optionLabel="label" optionValue="label" class="w-full" />
+          </div>
           <!-- Message -->
           <div class="mb-4">
             <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
@@ -93,6 +98,7 @@ const form = ref({
   email: '',
   vehicle: '',
   serviceDate: null,
+  typePrestation: '',
   message: '',
   isCondition: false,
   isRgpd: false,
@@ -111,9 +117,6 @@ const error = ref<string | null>(null);
 const suggestions = ref<string[]>([]);
 const emailDomains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com"];
 const toast = useToast();
-
-const showSuccess = () => {
-};
 
 useFetch<Voiture[]>('/api/car')
   .then((response) => {
@@ -140,6 +143,22 @@ const search = (event: any) => {
 };
 
 const handleSubmit = async () => {
+  // Client-side validation
+  if (!form.value.name || !form.value.firstName || !form.value.phone || !form.value.email || !form.value.vehicle || !form.value.serviceDate || !form.value.typePrestation || !form.value.message || !form.value.isCondition || !form.value.isRgpd) {
+    toast.add({ severity: 'warn', summary: 'Erreur', detail: 'Tous les champs doivent être remplis', life: 3000 });
+    return;
+  }
+
+  if (form.value.message.length < 50) {
+    toast.add({ severity: 'warn', summary: 'Erreur', detail: 'Le message ne doit pas dépasser 50 caractères', life: 3000 });
+    return;
+  }
+
+  if (!form.value.isCondition) {
+    toast.add({ severity: 'warn', summary: 'Erreur', detail: 'Vous devez accepter les conditions', life: 3000 });
+    return;
+  }
+
   try {
     const response = await $fetch('/api/contact', {
       method: 'POST',
@@ -155,6 +174,7 @@ const handleSubmit = async () => {
         email: '',
         vehicle: '',
         serviceDate: null,
+        typePrestation: '',
         message: '',
         isCondition: false,
         isRgpd: false,

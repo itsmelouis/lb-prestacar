@@ -10,14 +10,14 @@ interface ContactBody {
   phone: string;
   message: string;
   isCondition: boolean;
+  typePrestation: string;
   isRgpd: boolean;
   serviceDate: Date;
   vehicle: string
 }
 
 export default eventHandler<{ body: ContactBody }>(async (event) => {
-  const { firstName, name, email, phone, message, isCondition, isRgpd, serviceDate, vehicle } = await readBody(event);
-console.log(await readBody(event));
+  const { firstName, name, email, phone, message, isCondition, isRgpd, serviceDate, vehicle, typePrestation } = await readBody(event);
   // Vérification des champs obligatoires
   if (!firstName) {
     console.log('prénom pas là', firstName);
@@ -92,7 +92,7 @@ console.log(await readBody(event));
         nom: name,
         email: email,
         telephone: phone ? phone : null, // Permet de stocker null si le téléphone n'est pas renseigné
-        type_prestation: "contact", // Gestion du type de prestation
+        type_prestation: typePrestation, // Gestion du type de prestation
         message: message,
         estCondition: isCondition,
         estRgpd: isRgpd,
