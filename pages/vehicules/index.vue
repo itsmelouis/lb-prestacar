@@ -55,13 +55,17 @@ const filteredCars = computed(() => {
   if (cars.value) {
     return cars.value.filter(car => {
       const matchesSearch = car.nom.toLowerCase().includes(search.value.toLowerCase());
-      // const matchesCategory = selectedCategories.value.length === 0 ||
-      //   car.Categories.some(category => selectedCategories.value.includes(category.categorieId));
-      return matchesSearch;
+      const matchesCategory = selectedCategories.value.length === 0 ||
+        selectedCategories.value.every(selectedCategoryId => 
+          car.Categories && car.Categories.some(category => category.categorieId === selectedCategoryId)
+        );
+      return matchesSearch && matchesCategory;
     });
   }
   return [];
 });
+
+watchEffect(() => console.log(cars.value));
 
 const tabs = ref([
   {

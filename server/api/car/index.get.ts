@@ -4,7 +4,8 @@ export default eventHandler(async (event) => {
   return await prisma.voiture.findMany({
     include: {
       GrillesTarifiaires: true,
-      Options: true
+      Options: true,
+      Categories: true,
     }
   });
 });
