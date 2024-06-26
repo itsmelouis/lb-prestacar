@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center bottom-0 py-10 px-4 sm:px-52 space-y-5">
+  <footer class="flex flex-col sm:flex-row sm:justify-between sm:items-center bottom-0 py-10 px-4 sm:px-52 space-y-5 shadow-[rgba(0,0,0,0.24)_0px_-3px_8px] mt-10">
     <div class="mb-6 sm:mb-0 self-center">
       <img src="/logo-white.svg" alt="Logo de PrestaCar" width="150" />
     </div>
@@ -25,5 +25,5 @@
         </a>
       </ul>
     </div>
-  </div>
+  </footer>
 </template>
