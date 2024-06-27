@@ -2,7 +2,7 @@
   <section class="relative">
     <img alt="Luxury vehicle" class="w-full h-auto object-cover" height="500" src="/hero_limo.png" width="768" />
     <div
-      class="absolute left-4 bottom-4 md:left-10 md:bottom-10 bg-black bg-opacity-50 flex flex-col justify-center items-start p-4 md:p-8 rounded-lg max-w-full sm:max-w-md lg:max-w-lg">
+      class="hidden md:absolute left-4 bottom-4 md:left-10 md:bottom-10 bg-black bg-opacity-50 md:flex flex-col justify-center items-start p-4 md:p-8 rounded-lg max-w-full sm:max-w-md lg:max-w-lg">
       <h2 class="text-xl md:text-3xl font-bold text-white">PRESTACAR, <br> le meilleur de la location de voitures de
         luxe.</h2>
       <ul class="text-white mt-4 space-y-2 text-sm md:text-base">
@@ -22,7 +22,7 @@
   </section>
   <section class="flex flex-col justify-center items-center my-10">
     <h3 class="font-semibold text-2xl text-center mb-4">Nos top véhicules</h3>
-    <div class="flex flex-row gap-8 flex-wrap">
+    <div class="flex flex-col md:flex-row justify-items-center gap-8 flex-wrap">
       <CardCar title="Limousine Chrysler" id="3" image="limo_chrysler" price="350€" />
       <CardCar title="Cadillac Escalade" id="4" image="cadillac_escalade" price="350€" />
       <CardCar title="Porsche Boxster" id="5" image="porsche_986" price="300€" />
@@ -104,7 +104,7 @@ import type { Avis } from '@prisma/client';
 const products = ref([
   { image: 'cadillac_escalade/18', name: 'Mariage' },
   { image: 'lincoln_towncar/4', name: 'Anniversaire' },
-  { image: 'lincoln_towncar/1', name: 'Soirée' },
+  { image: 'limo_chrysler/6', name: 'Soirée' },
   { image: 'audi_a4/7', name: 'Transport Aéroport/Gare' },
 ])
 

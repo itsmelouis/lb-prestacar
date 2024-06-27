@@ -4,7 +4,7 @@
       <CldImage v-if="carData?.cloudinaryAssets?.length" class="w-full h-auto" :src="carData.cloudinaryAssets[0]"
         width="2000" height="700" :alt="`Photo montrant une ${carData.nom}`" />
       <div
-        class="absolute left-10 bottom-10 flex flex-col justify-center items-start p-8 max-w-fit max-h-fit rounded-lg">
+        class="hidden absolute left-10 bottom-10 md:flex flex-col justify-center items-start p-8 max-w-fit max-h-fit rounded-lg">
         <h2 class="text-3xl font-bold text-white">{{ carData?.nom }}</h2>
         <div class="mt-4 space-x-4">
           <Button label="Voir les tarifs" severity="primary" @click="activeTabIndex = 1" />
