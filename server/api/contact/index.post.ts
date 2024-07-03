@@ -20,7 +20,6 @@ export default eventHandler<{ body: ContactBody }>(async (event) => {
   const { firstName, name, email, phone, message, isCondition, isRgpd, serviceDate, vehicle, typePrestation } = await readBody(event);
   // Vérification des champs obligatoires
   if (!firstName) {
-    console.log('prénom pas là', firstName);
     throw createError({
       message: "Le prénom est obligatoire.",
       statusCode: 400,

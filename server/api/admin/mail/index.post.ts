@@ -3,7 +3,9 @@ import { defineEventHandler } from 'h3';
 
 const resend = new Resend(process.env.NUXT_RESEND_API_KEY);
 
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
+  await requireAuthSession(event);
+
   try {
     // Récupération de tous les contacts
     const response = await resend.contacts.list({ audienceId: 'c354af32-5877-40e7-b903-2a19c70c1796' });
